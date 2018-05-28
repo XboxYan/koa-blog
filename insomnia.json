@@ -1,0 +1,165 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-05-28T10:06:35.542Z",
+	"__export_source": "insomnia.desktop.app:v5.16.2",
+	"resources": [
+		{
+			"_id": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"created": 1527233003904,
+			"description": "",
+			"modified": 1527233003904,
+			"name": "Koa",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_f40681e9e9f245fe802ae642d0b68ea7",
+			"color": null,
+			"created": 1527233004478,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1527233004478,
+			"name": "New Environment",
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_495033b60c3c4830ab48ae45ba68076d",
+			"cookies": [],
+			"created": 1527233004497,
+			"modified": 1527233004497,
+			"name": "Default Jar",
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_dcd57e48a27042fe9ff43fdda329569e",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\":\"\",\n\t\"password\":\"\"\n}"
+			},
+			"created": 1527233138006,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_17050937b07a443390b2b55f3b1da15f",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527233138007,
+			"method": "POST",
+			"modified": 1527498689552,
+			"name": "注册",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/user/register",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fabbe5bc2bd54b87a8472f5ea3dc3bf4",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}"
+			},
+			"created": 1527497446498,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_1cb74401e2c34ad49e7b059cbfb9cf8c",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527497446498,
+			"method": "POST",
+			"modified": 1527498791714,
+			"name": "登录",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/user/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ac5b471480054f6995a97c3f40d96b91",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"title\":\"hello mongoDB\",\n\t\"description\":\"这第二篇测试文章\",\n\t\"content\":\"这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~\",\n\t\"userId\":\"5b0bc3ddeb820d176c4c4578\"\n}"
+			},
+			"created": 1527499454638,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_e4df45ed56fb4bb18fb896e17009913c",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527499454638,
+			"method": "POST",
+			"modified": 1527500033419,
+			"name": "发布文章",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/article",
+			"_type": "request"
+		},
+		{
+			"_id": "req_714ce9fe1be94fc8bef8b335658cf76a",
+			"authentication": {},
+			"body": {},
+			"created": 1527500285672,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1527500285672,
+			"method": "GET",
+			"modified": 1527500332481,
+			"name": "获取文章",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/article/5b0bc3ddeb820d176c4c4578",
+			"_type": "request"
+		},
+		{
+			"_id": "env_94324cdcf2a94225a90e5c6f5443b923",
+			"color": null,
+			"created": 1527233049881,
+			"data": {
+				"server": "http://localhost:5000"
+			},
+			"isPrivate": false,
+			"modified": 1527233120658,
+			"name": "localhost",
+			"parentId": "env_f40681e9e9f245fe802ae642d0b68ea7",
+			"_type": "environment"
+		}
+	]
+}
