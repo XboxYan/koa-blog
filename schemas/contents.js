@@ -11,7 +11,7 @@ module.exports = new Schema({
     },
 
     //作者Id
-    user: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },

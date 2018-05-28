@@ -4,10 +4,14 @@
 
 主要实现了以下接口:
 
-* 登录 ( POST ) `/api/login`
+* 登录 ( POST ) `/api/user/login`
 
-* 注册 ( POST ) `/api/register` 
+* 注册 ( POST ) `/api/user/register` 
 
 * 发布文章 ( POST ) `/api/article`
 
-* 查询文章 ( GET ) `/api/article`
+* 获取文章 ( GET ) `/api/article`
+
+* 发表评论 ( POST ) `/api/comment`
+
+* 获取评论 ( GET ) `/api/comment`
