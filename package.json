@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "mongod": "mongod --dbpath ./db --port 55555",
-    "start": " node app.js"
+    "start": " nodemon app.js"
   },
   "author": "xboxyan",
   "license": "MIT",
@@ -14,5 +14,8 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }

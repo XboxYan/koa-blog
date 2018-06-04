@@ -5,22 +5,16 @@ module.exports = new mongoose.Schema({
     
     content: String,
 
-    //作者Id
-    userId: {
+    //关联作者
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
 
-    //所属文章Id
-    articleId: {
+    //关联文章
+    article: {
         type: Schema.Types.ObjectId,
         ref: 'Contents'
-    },
-
-    //作者Id
-    username: {
-        type: String,
-        required: true
     },
 
     //发布时间

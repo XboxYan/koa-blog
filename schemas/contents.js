@@ -10,8 +10,8 @@ module.exports = new Schema({
         required:true 
     },
 
-    //作者Id
-    userId: {
+    //关联作者
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
@@ -31,5 +31,11 @@ module.exports = new Schema({
     description: String,
 
     content: String,
+
+    //关联评论
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comments'
+    }]
 
 });

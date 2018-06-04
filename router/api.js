@@ -80,7 +80,7 @@ router.post('/article', async (ctx, next) => {
     }
     const { title,description,content,userId } = ctx.request.body;
     try {
-        const article = await new Contents({ title,description,content,userId }).save();
+        const article = await new Contents({ title,description,content,user:userId }).save();
         responseData.success = true;
         responseData.message = '发布成功';
         responseData.data = article;
@@ -94,17 +94,19 @@ router.post('/article', async (ctx, next) => {
 });
 
 //获取文章
-router.get('/article/:id', async (ctx, next) => {
+router.get('/article', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
         "data":[],
         "counts":0,
     }
-    const { id } = ctx.params;
+    //const { id } = ctx.params;
+    const { page=1, pagesize=1 } = ctx.query
+    const skip = (page-1)*pagesize;
     try {
-        const articles = await Contents.find({userId:id});
-        const counts = await Contents.count({userId:id});
+        const articles = await Contents.find().limit(~~pagesize).skip(~~skip).populate('user');
+        const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.data = articles;
@@ -126,9 +128,9 @@ router.post('/comment', async (ctx, next) => {
         "message": "",
         "data":{}
     }
-    const { content,userId,articleId,username } = ctx.request.body;
+    const { content,userId,articleId } = ctx.request.body;
     try {
-        const comment = await new Comments({ content,userId,articleId,username }).save();
+        const comment = await new Comments({ content,user:userId,article:articleId }).save();
         responseData.success = true;
         responseData.message = '发布评论成功';
         responseData.data = comment;
@@ -151,8 +153,8 @@ router.get('/comment/:id', async (ctx, next) => {
     }
     const { id } = ctx.params;
     try {
-        const comments = await Comments.find({articleId:id});
-        const counts = await Comments.count({articleId:id});
+        const comments = await Comments.find({article:id}).populate('article','title').populate('user','username');
+        const counts = await Comments.count({article:id});
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.data = comments;
