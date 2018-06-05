@@ -1,8 +1,8 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-05-28T10:06:35.542Z",
-	"__export_source": "insomnia.desktop.app:v5.16.2",
+	"__export_date": "2018-06-05T12:30:11.672Z",
+	"__export_source": "insomnia.desktop.app:v5.16.6",
 	"resources": [
 		{
 			"_id": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
@@ -38,7 +38,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"username\":\"\",\n\t\"password\":\"\"\n}"
+				"text": "{\n\t\"username\":\"yan\",\n\t\"password\":\"111\"\n}"
 			},
 			"created": 1527233138006,
 			"description": "",
@@ -52,7 +52,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1527233138007,
 			"method": "POST",
-			"modified": 1527498689552,
+			"modified": 1527563452118,
 			"name": "注册",
 			"parameters": [],
 			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
@@ -69,7 +69,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}"
+				"text": "{\n\t\"username\":\"yan\",\n\t\"password\":\"111\"\n}"
 			},
 			"created": 1527497446498,
 			"description": "",
@@ -83,7 +83,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1527497446498,
 			"method": "POST",
-			"modified": 1527498791714,
+			"modified": 1527649027949,
 			"name": "登录",
 			"parameters": [],
 			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
@@ -100,7 +100,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"title\":\"hello mongoDB\",\n\t\"description\":\"这第二篇测试文章\",\n\t\"content\":\"这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~这篇文章采用koa作为后台，mongoDB作为数据库~~\",\n\t\"userId\":\"5b0bc3ddeb820d176c4c4578\"\n}"
+				"text": "{\n\t\"title\":\"22222222hello koa\",\n\t\"description\":\"22222这测试文章,测试一下分类\",\n\t\"content\":\"2222测试一下分类测试一下分类测试一下分类~\",\n\t\"userId\":\"5b0cc5024607e5769c14e016\",\n\t\"categories\":[\"5b167d3b0c676b1facacb590\"]\n}"
 			},
 			"created": 1527499454638,
 			"description": "",
@@ -114,7 +114,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1527499454638,
 			"method": "POST",
-			"modified": 1527500033419,
+			"modified": 1528200673553,
 			"name": "发布文章",
 			"parameters": [],
 			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
@@ -136,7 +136,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1527500285672,
 			"method": "GET",
-			"modified": 1527500332481,
+			"modified": 1528201428650,
 			"name": "获取文章",
 			"parameters": [],
 			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
@@ -145,7 +145,135 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ server  }}/api/article/5b0bc3ddeb820d176c4c4578",
+			"url": "{{ server  }}/api/article?category=1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_08760e537a5843c4956584d32e9a8589",
+			"authentication": {},
+			"body": {},
+			"created": 1527647910945,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1527647910945,
+			"method": "GET",
+			"modified": 1527650760448,
+			"name": "获取评论",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/comment/5b0e156369fd962080775547",
+			"_type": "request"
+		},
+		{
+			"_id": "req_78bdca8ca16d41a2b999ac270d5a2bdf",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"content\":\"这是一条评论\",\n\t\"userId\":\"5b0cc4bd6802da23fc780a3e\",\n\t\"articleId\":\"5b0e156369fd962080775547\"\n}"
+			},
+			"created": 1527648878962,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4cc8d1a745ab4f408041d678d97d5a11",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1527648878962,
+			"method": "POST",
+			"modified": 1527649765453,
+			"name": "发布评论",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/comment",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6955d5d2c5db425ba29dfc3ed7a91371",
+			"authentication": {},
+			"body": {},
+			"created": 1528189709787,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1527574098308.5,
+			"method": "GET",
+			"modified": 1528199674182,
+			"name": "获取文章详情",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/article/5b1679b7091ea01f4c618736",
+			"_type": "request"
+		},
+		{
+			"_id": "req_aa91543665b74ba3aceeabb556ed54a2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\":\"koa\"\n}"
+			},
+			"created": 1528197550368,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_d29357d034654ff1b532f5bef8bc5fd4",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1528197550368,
+			"method": "POST",
+			"modified": 1528200505694,
+			"name": "新增分类",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/category",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4b61592c41984de7b368ecbe39150bf5",
+			"authentication": {},
+			"body": {},
+			"created": 1528197698692,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1528197698692,
+			"method": "GET",
+			"modified": 1528197703425,
+			"name": "获取分类",
+			"parameters": [],
+			"parentId": "wrk_d6bf57842bb64cf1a55ba3d534a27399",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ server  }}/api/category",
 			"_type": "request"
 		},
 		{
