@@ -15,27 +15,27 @@ module.exports = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-
-    //添加时间
-    addTime: {
-        type: Date,
-        default: new Date
-    },
-
+    
     //阅读量
     views: {
         type: Number,
         default: 0
     },
 
+    //类别
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Categories'
+    }],
+
     description: String,
 
     content: String,
 
-    //关联评论
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comments'
-    }]
+    //添加时间
+    addTime: {
+        type: Date,
+        default: new Date
+    },
 
 });

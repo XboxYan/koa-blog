@@ -3,6 +3,7 @@ const router = require('koa-router')();
 const User = require('../models/Users');
 const Contents = require('../models/Contents');
 const Comments = require('../models/Comments');
+const Categories = require('../models/Categories');
 
 //登录
 router.post('/user/login', async (ctx, next) => {
@@ -71,29 +72,67 @@ router.post('/user/register', async (ctx, next) => {
     }
 });
 
+//新增分类
+router.post('/category', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+    }
+    const { name } = ctx.request.body;
+    try {
+        const category = await new Categories({ name }).save();
+        responseData.success = true;
+        responseData.message = '新增分类成功';
+        ctx.body = responseData;
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        ctx.body = responseData;
+    }
+});
+
+//获取分类
+router.get('/category', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "data":[],
+        "message": "",
+    }
+    const { name } = ctx.request.body;
+    try {
+        const categories = await Categories.find();
+        responseData.success = true;
+        responseData.message = '操作成功';
+        responseData.data = categories;
+        ctx.body = responseData;
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        responseData.data = [];
+        ctx.body = responseData;
+    }
+});
+
 //发布文章
 router.post('/article', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
-        "data":{}
     }
-    const { title,description,content,userId } = ctx.request.body;
+    const { title,description,content,userId,categories } = ctx.request.body;
     try {
-        const article = await new Contents({ title,description,content,user:userId }).save();
+        const article = await new Contents({ title,description,content,user:userId,categories }).save();
         responseData.success = true;
         responseData.message = '发布成功';
-        responseData.data = article;
         ctx.body = responseData;
     } catch (error) {
         responseData.success = false;
         responseData.message = error.message;
-        responseData.data = {};
         ctx.body = responseData;
     }
 });
 
-//获取文章
+//获取所有文章（分页）
 router.get('/article', async (ctx, next) => {
     const responseData = {
         "success": false,
@@ -102,10 +141,17 @@ router.get('/article', async (ctx, next) => {
         "counts":0,
     }
     //const { id } = ctx.params;
-    const { page=1, pagesize=1 } = ctx.query
+    const { page=1, pagesize=10, category } = ctx.query
     const skip = (page-1)*pagesize;
     try {
-        const articles = await Contents.find().limit(~~pagesize).skip(~~skip).populate('user');
+        let categories = {}
+        if(category){
+            const $category = await Categories.findOne({name:category});
+            categories.categories = $category._id;
+        }else{
+            categories = {}
+        }
+        const articles = await Contents.find(categories).limit(~~pagesize).skip(~~skip).populate(['user','categories']).select("-content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
@@ -121,24 +167,48 @@ router.get('/article', async (ctx, next) => {
     }
 });
 
+//获取文章详情
+router.get('/article/:id', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+        "data":{},
+    }
+    const { id } = ctx.params;
+    try {
+        const article = await Contents.findById(id).populate('user','username').populate('categories');
+        //阅读数+1
+        article.views++;
+        await article.save();
+        //await article.update({$inc:{views:1}});
+        responseData.success = true;
+        responseData.message = '操作成功';
+        responseData.data = article;
+        ctx.body = responseData;
+        
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        responseData.data = {};
+        ctx.body = responseData;
+    }
+});
+
 //发布评论
 router.post('/comment', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
-        "data":{}
     }
     const { content,userId,articleId } = ctx.request.body;
     try {
         const comment = await new Comments({ content,user:userId,article:articleId }).save();
         responseData.success = true;
         responseData.message = '发布评论成功';
-        responseData.data = comment;
         ctx.body = responseData;
     } catch (error) {
         responseData.success = false;
         responseData.message = error.message;
-        responseData.data = {};
         ctx.body = responseData;
     }
 });
