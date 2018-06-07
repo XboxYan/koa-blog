@@ -119,7 +119,7 @@ router.post('/article', async (ctx, next) => {
         "success": false,
         "message": "",
     }
-    const { title,description,content,userId,categories } = ctx.request.body;
+    const { title,description,content,userId,categories=['未分类'] } = ctx.request.body;
     try {
         const article = await new Contents({ title,description,content,user:userId,categories }).save();
         responseData.success = true;
@@ -141,17 +141,16 @@ router.get('/article', async (ctx, next) => {
         "counts":0,
     }
     //const { id } = ctx.params;
-    const { page=1, pagesize=10, category } = ctx.query
+    const { page=1, pagesize=10, category } = ctx.query;
     const skip = (page-1)*pagesize;
     try {
         let categories = {}
         if(category){
-            const $category = await Categories.findOne({name:category});
-            categories.categories = $category._id;
+            categories.categories = category;
         }else{
             categories = {}
         }
-        const articles = await Contents.find(categories).limit(~~pagesize).skip(~~skip).populate(['user','categories']).select("-content -comments");
+        const articles = await Contents.find(categories).sort({_id:-1}).limit(~~pagesize).skip(~~skip).populate('user').select("-content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
@@ -221,9 +220,11 @@ router.get('/comment/:id', async (ctx, next) => {
         "data":[],
         "counts":0,
     }
+    const { page=1, pagesize=10, category } = ctx.query;
+    const skip = (page-1)*pagesize;
     const { id } = ctx.params;
     try {
-        const comments = await Comments.find({article:id}).populate('article','title').populate('user','username');
+        const comments = await Comments.find({article:id}).sort({_id:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
         const counts = await Comments.count({article:id});
         responseData.success = true;
         responseData.message = '操作成功';

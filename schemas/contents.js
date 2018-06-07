@@ -24,8 +24,8 @@ module.exports = new Schema({
 
     //类别
     categories: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Categories'
+        type: String,
+        default: '未分类'
     }],
 
     description: String,
