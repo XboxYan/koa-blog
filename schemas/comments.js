@@ -20,7 +20,7 @@ module.exports = new mongoose.Schema({
     //发布时间
     createAt: {
         type: Date,
-        default: new Date
+        default: Date.now
     }
 
 });

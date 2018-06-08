@@ -35,7 +35,7 @@ module.exports = new Schema({
     //添加时间
     addTime: {
         type: Date,
-        default: new Date
+        default: Date.now
     },
 
 });

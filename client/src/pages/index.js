@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
+import Loader from '../components/loader';
 import Profile from '../components/profile';
+import BackTop from '../components/backTop';
+import Footer from '../components/footer';
 import fetchData from '../util/Fetch';
-//import { CacheLink, Route } from 'react-keeper';
+import { CacheLink } from 'react-keeper';
 
 export default class extends PureComponent {
 
@@ -17,6 +20,7 @@ export default class extends PureComponent {
     componentDidMount() {
         this.getArticle();
     }
+    
     render() {
         const {articles} = this.state;
         return (
@@ -24,15 +28,15 @@ export default class extends PureComponent {
                 <section className="main sildeUpMin">
                     <Profile/>
                     {
-                        articles.length>0&&
+                        articles.length>0?
                         articles.map((article)=>(
                             <article className="article" key={article._id}>
                                 <div className="article-header">
-                                    <a className="article-title" href="/">{article.title}</a>
+                                    <CacheLink className="article-title" to={"/article/"+article._id}>{article.title}</CacheLink>
                                     <div className="article-meta">{article.addTime}<span className="iconfont icon-star"></span>
                                         {
                                             article.categories.map((category,i)=>(
-                                                <a key={i} className="article-tag" href="/">{category}</a>
+                                                <CacheLink key={i} className="article-tag" to="/categories" state={{category}}>{category}</CacheLink>
                                             ))
                                         }
                                     </div>
@@ -41,16 +45,21 @@ export default class extends PureComponent {
                                     {article.description}
                                 </div>
                                 <div className="article-bottom">
-                                    <a className="article-readmore" href="/">阅读更多</a>
+                                    <CacheLink className="article-readmore" to={"/article/"+article._id}>阅读更多</CacheLink>
                                 </div>
                             </article>
                         ))
+                        :
+                        <Loader/>
                     }
                     <nav className="paginator scrollIn">
+                        <a className="prev" href="/"><i className="iconfont icon-left"></i>上一页</a>
                         <span className="page-number">Page 1.</span>
                         <a className="next" href="/">下一页<i className="iconfont icon-right"></i></a>
                     </nav>
                 </section>
+                <BackTop/>
+                <Footer/>
             </div>
         )
     }

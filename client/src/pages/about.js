@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import Footer from '../components/footer';
 
 export default class extends PureComponent {
     render(){
@@ -7,6 +8,7 @@ export default class extends PureComponent {
                 <section className="main sildeUpMin">
                     about
                 </section>
+                <Footer/>
             </div>
         )
     }

@@ -175,7 +175,7 @@ router.get('/article/:id', async (ctx, next) => {
     }
     const { id } = ctx.params;
     try {
-        const article = await Contents.findById(id).populate('user','username').populate('categories');
+        const article = await Contents.findById(id).populate('user','username');
         //阅读数+1
         article.views++;
         await article.save();
