@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "mongod": "mongod --dbpath ./db --port 55555",
-    "start": " nodemon app.js"
+    "start": " nodemon app.js",
+    "blog" : "cd client && yarn start"
   },
   "author": "xboxyan",
   "license": "MIT",

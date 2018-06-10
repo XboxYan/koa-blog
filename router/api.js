@@ -150,7 +150,7 @@ router.get('/article', async (ctx, next) => {
         }else{
             categories = {}
         }
-        const articles = await Contents.find(categories).sort({_id:-1}).limit(~~pagesize).skip(~~skip).populate('user').select("-content -comments");
+        const articles = await Contents.find(categories).sort({addTime:-1}).limit(~~pagesize).skip(~~skip).populate('user').select("-content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
@@ -224,11 +224,48 @@ router.get('/comment/:id', async (ctx, next) => {
     const skip = (page-1)*pagesize;
     const { id } = ctx.params;
     try {
-        const comments = await Comments.find({article:id}).sort({_id:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
+        const comments = await Comments.find({article:id}).sort({addTime:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
         const counts = await Comments.count({article:id});
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.data = comments;
+        responseData.counts = counts;
+        ctx.body = responseData;
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        responseData.data = [];
+        responseData.counts = 0;
+        ctx.body = responseData;
+    }
+});
+
+//归档
+router.get('/archives', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+        "data":[],
+        "counts":0,
+    }
+    try {
+        let categories = {}
+        const articles = await Contents.aggregate([{$group:{
+                _id:{$year:"$addTime"},
+                article:{
+                    $push:{
+                        _id:"$_id",
+                        title:"$title",
+                        addTime:"$addTime"
+                    }
+                }
+            }},
+            {$sort:{_id:-1}}
+        ])
+        const counts = await Contents.count();
+        responseData.success = true;
+        responseData.message = '操作成功';
+        responseData.data = articles;
         responseData.counts = counts;
         ctx.body = responseData;
     } catch (error) {

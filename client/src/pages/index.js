@@ -33,10 +33,10 @@ export default class extends PureComponent {
                             <article className="article" key={article._id}>
                                 <div className="article-header">
                                     <CacheLink className="article-title" to={"/article/"+article._id}>{article.title}</CacheLink>
-                                    <div className="article-meta">{article.addTime}<span className="iconfont icon-star"></span>
+                                    <div className="article-meta">{ new Date(article.addTime).toLocaleString() }<span className="iconfont icon-star"></span>
                                         {
                                             article.categories.map((category,i)=>(
-                                                <CacheLink key={i} className="article-tag" to="/categories" state={{category}}>{category}</CacheLink>
+                                                <CacheLink key={i} className="article-tag" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>
                                             ))
                                         }
                                     </div>

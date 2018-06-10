@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import fetchData from '../util/Fetch';
-import { Control,Link } from 'react-keeper';
+import { Control,CacheLink } from 'react-keeper';
 import Donate from '../components/donate';
 import Loader from '../components/loader';
 import Footer from '../components/footer';
@@ -39,7 +39,7 @@ export default class extends PureComponent {
                             <div className="post-meta">
                                 <i className="iconfont icon-tag-inner"></i>
                                 {
-                                    article.categories && article.categories.map((category, i) => <Link key={i} className="category-link" to="/categories" state={{category}}>{category}</Link>)
+                                    article.categories && article.categories.map((category, i) => <CacheLink key={i} className="category-link" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>)
                                 }
                             </div>
                         </article>
