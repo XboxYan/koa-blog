@@ -189,8 +189,7 @@ router.get('/article/:id', async (ctx, next) => {
         responseData.prev = prev;
         responseData.next = next;
         responseData.data = article;
-        ctx.body = responseData;
-        
+        ctx.body = responseData;        
     } catch (error) {
         responseData.success = false;
         responseData.message = error.message;
@@ -248,7 +247,6 @@ router.get('/comment/:id', async (ctx, next) => {
 
 //归档
 router.get('/archives', async (ctx, next) => {
-    console.log(new Date().toLocaleString())
     const responseData = {
         "success": false,
         "message": "",
