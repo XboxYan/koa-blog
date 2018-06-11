@@ -5,35 +5,52 @@ import BackTop from '../components/backTop';
 import Footer from '../components/footer';
 import fetchData from '../util/Fetch';
 import { CacheLink } from 'react-keeper';
+import moment from 'moment';
 
 export default class extends PureComponent {
 
+    pagesize = 3;
+
     state = {
-        articles:[]
+        articles:[],
+        total:1,
+        page:1,
+        isrender:true
     }
 
-    getArticle = async (page=1,pagesize=10) => {
-        const articles = await fetchData(`/api/article?page=${page}&pagesize=${pagesize}`);
-        this.setState({articles:articles.data});
+    getArticle = async (page=1) => {
+        this.setState({isrender:true});
+        const articles = await fetchData(`/api/article?page=${page}&pagesize=${this.pagesize}`);
+        this.setState({articles:articles.data,total:articles.counts,isrender:false});
+    }
+
+    onhandle = (dir) => () => {
+        const { total, page } = this.state;
+        let $page = Math.max(Math.min(page + dir,Math.ceil(total/this.pagesize)),1);
+        this.setState({page:$page});
+        this.getArticle($page);
     }
     
-    componentDidMount() {
+    componentDidMount () {
         this.getArticle();
     }
     
     render() {
-        const {articles} = this.state;
+        const {articles,page,total,isrender} = this.state;
+        const max = Math.ceil(total/this.pagesize);
         return (
             <div className="container">
                 <section className="main sildeUpMin">
                     <Profile/>
                     {
-                        articles.length>0?
+                        isrender?
+                        <Loader/>
+                        :
                         articles.map((article)=>(
                             <article className="article" key={article._id}>
                                 <div className="article-header">
                                     <CacheLink className="article-title" to={"/article/"+article._id}>{article.title}</CacheLink>
-                                    <div className="article-meta">{ new Date(article.addTime).toLocaleString() }<span className="iconfont icon-star"></span>
+                                    <div className="article-meta">{ moment(article.createTime).utcOffset(8).format("YYYY年M月D日") }<span className="iconfont icon-star"></span>
                                         {
                                             article.categories.map((category,i)=>(
                                                 <CacheLink key={i} className="article-tag" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>
@@ -49,13 +66,11 @@ export default class extends PureComponent {
                                 </div>
                             </article>
                         ))
-                        :
-                        <Loader/>
                     }
                     <nav className="paginator scrollIn">
-                        <a className="prev" href="/"><i className="iconfont icon-left"></i>上一页</a>
-                        <span className="page-number">Page 1.</span>
-                        <a className="next" href="/">下一页<i className="iconfont icon-right"></i></a>
+                        <a className="prev" data-hidden={page===1} onClick={this.onhandle(-1)}><i className="iconfont icon-left"></i>上一页</a>
+                        <span className="page-number">Page {page} / {max}.</span>
+                        <a className="next" data-hidden={page===max} onClick={this.onhandle(1)}>下一页<i className="iconfont icon-right"></i></a>
                     </nav>
                 </section>
                 <BackTop/>

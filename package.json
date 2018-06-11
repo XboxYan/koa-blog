@@ -6,7 +6,7 @@
   "scripts": {
     "mongod": "mongod --dbpath ./db --port 55555",
     "start": " nodemon app.js",
-    "blog" : "cd client && yarn start"
+    "blog": "cd client && yarn start"
   },
   "author": "xboxyan",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "moment": "^2.22.2",
     "mongoose": "^5.1.2"
   },
   "devDependencies": {

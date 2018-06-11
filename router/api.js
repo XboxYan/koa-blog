@@ -150,7 +150,7 @@ router.get('/article', async (ctx, next) => {
         }else{
             categories = {}
         }
-        const articles = await Contents.find(categories).sort({addTime:-1}).limit(~~pagesize).skip(~~skip).populate('user').select("-content -comments");
+        const articles = await Contents.find(categories).sort({createTime:-1}).limit(~~pagesize).skip(~~skip).populate('user').select("-content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
@@ -172,16 +172,22 @@ router.get('/article/:id', async (ctx, next) => {
         "success": false,
         "message": "",
         "data":{},
+        "prev":{},
+        "next":{}
     }
     const { id } = ctx.params;
     try {
         const article = await Contents.findById(id).populate('user','username');
         //阅读数+1
+        //await article.update({$inc:{views:1}});
         article.views++;
         await article.save();
-        //await article.update({$inc:{views:1}});
+        const prev = await Contents.findOne({createTime:{$gt:article.createTime}}).sort({createTime:1}).select("title");
+        const next = await Contents.findOne({createTime:{$lt:article.createTime}}).sort({createTime:-1}).select("title");
         responseData.success = true;
         responseData.message = '操作成功';
+        responseData.prev = prev;
+        responseData.next = next;
         responseData.data = article;
         ctx.body = responseData;
         
@@ -224,7 +230,7 @@ router.get('/comment/:id', async (ctx, next) => {
     const skip = (page-1)*pagesize;
     const { id } = ctx.params;
     try {
-        const comments = await Comments.find({article:id}).sort({addTime:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
+        const comments = await Comments.find({article:id}).sort({createTime:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
         const counts = await Comments.count({article:id});
         responseData.success = true;
         responseData.message = '操作成功';
@@ -242,6 +248,7 @@ router.get('/comment/:id', async (ctx, next) => {
 
 //归档
 router.get('/archives', async (ctx, next) => {
+    console.log(new Date().toLocaleString())
     const responseData = {
         "success": false,
         "message": "",
@@ -250,17 +257,31 @@ router.get('/archives', async (ctx, next) => {
     }
     try {
         let categories = {}
-        const articles = await Contents.aggregate([{$group:{
-                _id:{$year:"$addTime"},
-                article:{
-                    $push:{
-                        _id:"$_id",
-                        title:"$title",
-                        addTime:"$addTime"
+        const articles = await Contents.aggregate([
+            {
+                $sort:{createTime:-1}
+            },  
+            {
+                $group:{
+                    _id:{ 
+                        year: { $year : { $add: ['$createTime', 28800000] } }, //北京时间偏差
+                        month: { $month : { $add: ['$createTime', 28800000] } }
+                    },
+                    createTime:{
+                        $first:"$createTime"
+                    },
+                    article:{
+                        $push:{
+                            _id:"$_id",
+                            title:"$title",
+                            createTime:"$createTime",
+                        }
                     }
                 }
-            }},
-            {$sort:{_id:-1}}
+            },
+            {
+                $sort:{_id:-1}
+            },
         ])
         const counts = await Contents.count();
         responseData.success = true;

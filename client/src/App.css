@@ -791,7 +791,7 @@ pre .javascript .function,pre .keyword {
 }
 
 .highlight.styl.highlight:after {
-  content: "Styl"
+  content: "Style"
 }
 
 .highlight.java.highlight:after {
@@ -1223,7 +1223,7 @@ time:hover {
   box-sizing: border-box;
   min-height: 60vh;
   padding-top: 4rem;
-  width: 54%
+  width: 64%
 }
 
 @media screen and (min-width: 769px) and (max-width:1023px) {
@@ -1242,7 +1242,7 @@ time:hover {
 
 .header-nav {
   margin: 0 auto;
-  max-width: 58%;
+  max-width: 68%;
   height: 4rem;
   line-height: 4rem;
   align-items: center
@@ -1953,9 +1953,15 @@ time:hover {
 }
 
 .next,.prev {
+  cursor: pointer;
   display: inline-block;
   padding: 4px 12px;
   border-radius: 4px
+}
+
+.next[data-hidden=true],.prev[data-hidden=true] {
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .prev {

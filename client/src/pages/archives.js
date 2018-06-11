@@ -3,6 +3,7 @@ import { CacheLink } from 'react-keeper';
 import fetchData from '../util/Fetch';
 import Loader from '../components/loader';
 import Footer from '../components/footer';
+import moment from 'moment';
 
 export default class extends PureComponent {
     state = {
@@ -32,11 +33,11 @@ export default class extends PureComponent {
                             :
                             articles.map((d,i)=>(
                                 <Fragment key={i}>
-                                    <h3 className="archive-year">{d._id}</h3>
+                                    <h3 className="archive-year">{ moment(d.createTime).utcOffset(8).format("YYYY年M月") }</h3>
                                     {
                                         d.article.map(article=>(
                                             <div className="archive-item" key={article._id}>
-                                                <span className="archive-time">{article.addTime}</span>
+                                                <span className="archive-time">{moment(article.createTime).utcOffset(8).format("YYYY年M月D日")}</span>
                                                 <span className="archive-title">
                                                     <CacheLink to={"/article/"+article._id}>{article.title}</CacheLink>
                                                 </span>

@@ -6,7 +6,7 @@ const Categories = new mongoose.Schema({
         required: true
     },
     //添加时间
-    addTime: {
+    createTime: {
         type: Date,
         default: Date.now
     }

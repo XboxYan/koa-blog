@@ -4,6 +4,7 @@ import { Control,CacheLink } from 'react-keeper';
 import Donate from '../components/donate';
 import Loader from '../components/loader';
 import Footer from '../components/footer';
+import moment from 'moment';
 
 export default class extends PureComponent {
 
@@ -12,13 +13,26 @@ export default class extends PureComponent {
         isrender: true
     }
 
-    async componentDidMount() {
-        const article = await fetchData(`/api${Control.path}`);
-        this.setState({ article: article.data, isrender: false })
+    componentDidMount() {
+        const id = Control.path.split('article/')[1];
+        this.getArticle(id);
+    }
+
+    getArticle = async (id) => {
+        this.setState({isrender:true});
+        const article = await fetchData(`/api/article/${id}`);
+        this.setState({ article: article, isrender: false });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if( this.props.pathname.indexOf('article')>=0 && nextProps.pathname.indexOf('article')>=0 && this.props.pathname!==nextProps.pathname){
+            const {id} = nextProps.params;
+            this.getArticle(id);
+        }
     }
 
     render() {
-        const { article, isrender } = this.state;
+        const { article:{data,prev,next}, isrender } = this.state;
         return (
             <div className="container">
                 <section className="main sildeUpMin">
@@ -28,18 +42,18 @@ export default class extends PureComponent {
                         :
                         <article className="post">
                             <div className="post-header">
-                                <p className="post-title">{article.title}</p>
-                                <div className="meta-info"><span>{article.addTime}</span>
-                                    <i className="iconfont icon-eye"></i><span>{article.views}</span>
+                                <p className="post-title">{data.title}</p>
+                                <div className="meta-info"><span>{moment(data.createTime).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</span>
+                                    <i className="iconfont icon-eye"></i><span>{data.views}</span>
                                 </div>
                             </div>
                             <div className="post-content slideDownMin">
-                                {article.content}
+                                {data.content}
                             </div>
                             <div className="post-meta">
                                 <i className="iconfont icon-tag-inner"></i>
                                 {
-                                    article.categories && article.categories.map((category, i) => <CacheLink key={i} className="category-link" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>)
+                                    data.categories && data.categories.map((category, i) => <CacheLink key={i} className="category-link" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>)
                                 }
                             </div>
                         </article>
@@ -53,10 +67,17 @@ export default class extends PureComponent {
                             <div className="pf-links">
                                 <Donate />
                             </div>
-                            <nav className="pf-paginator">
-                                <a href="http://synch.site/2013/12/26/Banner-Post/" data-hover="Banner Post">上一篇</a>
-                                <a href="http://synch.site/2013/12/25/excerpts/" data-hover="Images"> 下一篇</a>
-                            </nav>
+                            {
+                                !isrender&&
+                                <nav className="pf-paginator">
+                                    {
+                                        prev&&<CacheLink to={"/article/"+prev._id} data-hover={prev.title}>上一篇</CacheLink>
+                                    }
+                                    {
+                                        next&&<CacheLink to={"/article/"+next._id} data-hover={next.title}> 下一篇</CacheLink>
+                                    }
+                                </nav>
+                            }
                         </div>
                     </div>
                 </section>

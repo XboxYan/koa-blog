@@ -3,6 +3,7 @@ import { Control,CacheLink,Route } from 'react-keeper';
 import Footer from '../components/footer';
 import Loader from '../components/loader';
 import fetchData from '../util/Fetch';
+import moment from 'moment';
 
 class Category extends PureComponent {
 
@@ -40,7 +41,7 @@ class Category extends PureComponent {
                     :
                     articles.map(article=>(
                         <article className="item" key={article._id}>
-                            <time className="item-date"> {article.addTime}</time>
+                            <time className="item-date"> {moment(article.createTime).utcOffset(8).format("YYYY年M月D日")}</time>
                             <CacheLink className="item-title" to={"/article/"+article._id}>{article.title}</CacheLink>
                         </article>
                     ))
