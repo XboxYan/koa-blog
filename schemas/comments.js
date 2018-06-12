@@ -18,7 +18,7 @@ module.exports = new mongoose.Schema({
     },
 
     //发布时间
-    createAt: {
+    createdAt: {
         type: Date,
         default: Date.now
     }

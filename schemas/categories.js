@@ -4,12 +4,9 @@ const Categories = new mongoose.Schema({
     name: {
         type: String,
         required: true
-    },
-    //添加时间
-    createTime: {
-        type: Date,
-        default: Date.now
     }
+},{ 
+    timestamps: true
 });
 
 module.exports = Categories;

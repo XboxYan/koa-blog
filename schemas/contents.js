@@ -32,10 +32,6 @@ module.exports = new Schema({
 
     content: String,
 
-    //添加时间
-    createTime: {
-        type: Date,
-        default: Date.now
-    },
-
+},{ 
+    timestamps: true
 });

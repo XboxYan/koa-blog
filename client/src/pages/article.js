@@ -43,7 +43,7 @@ export default class extends PureComponent {
                         <article className="post">
                             <div className="post-header">
                                 <p className="post-title">{data.title}</p>
-                                <div className="meta-info"><span>{moment(data.createTime).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</span>
+                                <div className="meta-info"><span>{moment(data.createdAt).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</span>
                                     <i className="iconfont icon-eye"></i><span>{data.views}</span>
                                 </div>
                             </div>

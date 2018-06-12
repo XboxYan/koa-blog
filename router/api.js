@@ -150,7 +150,7 @@ router.get('/article', async (ctx, next) => {
         }else{
             categories = {}
         }
-        const articles = await Contents.find(categories).sort({createTime:-1}).limit(~~pagesize).skip(~~skip).populate('user').select("-content -comments");
+        const articles = await Contents.find(categories).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).select("-user -views -content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
@@ -182,8 +182,8 @@ router.get('/article/:id', async (ctx, next) => {
         //await article.update({$inc:{views:1}});
         article.views++;
         await article.save();
-        const prev = await Contents.findOne({createTime:{$gt:article.createTime}}).sort({createTime:1}).select("title");
-        const next = await Contents.findOne({createTime:{$lt:article.createTime}}).sort({createTime:-1}).select("title");
+        const prev = await Contents.findOne({createdAt:{$gt:article.createdAt}}).sort({createdAt:1}).select("title");
+        const next = await Contents.findOne({createdAt:{$lt:article.createdAt}}).sort({createdAt:-1}).select("title");
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.prev = prev;
@@ -229,7 +229,7 @@ router.get('/comment/:id', async (ctx, next) => {
     const skip = (page-1)*pagesize;
     const { id } = ctx.params;
     try {
-        const comments = await Comments.find({article:id}).sort({createTime:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
+        const comments = await Comments.find({article:id}).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).populate('article','title').populate('user','username');
         const counts = await Comments.count({article:id});
         responseData.success = true;
         responseData.message = '操作成功';
@@ -257,22 +257,22 @@ router.get('/archives', async (ctx, next) => {
         let categories = {}
         const articles = await Contents.aggregate([
             {
-                $sort:{createTime:-1}
+                $sort:{createdAt:-1}
             },  
             {
                 $group:{
                     _id:{ 
-                        year: { $year : { $add: ['$createTime', 28800000] } }, //北京时间偏差
-                        month: { $month : { $add: ['$createTime', 28800000] } }
+                        year: { $year : { $add: ['$createdAt', 28800000] } }, //北京时间偏差
+                        month: { $month : { $add: ['$createdAt', 28800000] } }
                     },
-                    createTime:{
-                        $first:"$createTime"
+                    createdAt:{
+                        $first:"$createdAt"
                     },
                     article:{
                         $push:{
                             _id:"$_id",
                             title:"$title",
-                            createTime:"$createTime",
+                            createdAt:"$createdAt",
                         }
                     }
                 }
@@ -292,6 +292,36 @@ router.get('/archives', async (ctx, next) => {
         responseData.message = error.message;
         responseData.data = [];
         responseData.counts = 0;
+        ctx.body = responseData;
+    }
+});
+
+//搜索
+router.get('/search', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+        "data":[]
+    }
+    const { keywords } = ctx.query;
+    try {
+        if(keywords){
+            const regex = new RegExp(keywords, 'i');
+            const articles = await Contents.find({$or:[{title:regex},{description:regex},{content:regex}]}).select("title description");
+            responseData.success = true;
+            responseData.message = '操作成功';
+            responseData.data = articles;
+            ctx.body = responseData;
+        }else{
+            responseData.success = false;
+            responseData.message = '搜索词不能为空';
+            responseData.data = [];
+            ctx.body = responseData;
+        }
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        responseData.data = {};
         ctx.body = responseData;
     }
 });

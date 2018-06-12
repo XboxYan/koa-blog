@@ -41,7 +41,7 @@ class Category extends PureComponent {
                     :
                     articles.map(article=>(
                         <article className="item" key={article._id}>
-                            <time className="item-date"> {moment(article.createTime).utcOffset(8).format("YYYY年M月D日")}</time>
+                            <time className="item-date"> {moment(article.createdAt).utcOffset(8).format("YYYY年M月D日")}</time>
                             <CacheLink className="item-title" to={"/article/"+article._id}>{article.title}</CacheLink>
                         </article>
                     ))

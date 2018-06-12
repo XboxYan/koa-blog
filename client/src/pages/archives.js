@@ -33,11 +33,11 @@ export default class extends PureComponent {
                             :
                             articles.map((d,i)=>(
                                 <Fragment key={i}>
-                                    <h3 className="archive-year">{ moment(d.createTime).utcOffset(8).format("YYYY年M月") }</h3>
+                                    <h3 className="archive-year">{ moment(d.createdAt).utcOffset(8).format("YYYY年M月") }</h3>
                                     {
                                         d.article.map(article=>(
                                             <div className="archive-item" key={article._id}>
-                                                <span className="archive-time">{moment(article.createTime).utcOffset(8).format("YYYY年M月D日")}</span>
+                                                <span className="archive-time">{moment(article.createdAt).utcOffset(8).format("M月D日")}</span>
                                                 <span className="archive-title">
                                                     <CacheLink to={"/article/"+article._id}>{article.title}</CacheLink>
                                                 </span>

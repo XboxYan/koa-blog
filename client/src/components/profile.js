@@ -4,7 +4,7 @@ export default class extends PureComponent {
     render() {
         return (
             <div className="profile">
-                <img className="avatar" alt="header" src={require('../img/header.png')} />
+                <img onClick={this.props.onClick} className="avatar" alt="header" src={require('../img/header.png')} />
                 <p className="author">XboxYan</p>
                 <div className="social">
                     <a target="_blank" rel="noopener noreferrer" className="social-links" href="https://github.com/Lemonreds/hexo-theme-nayo">
