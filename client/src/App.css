@@ -1187,7 +1187,6 @@ time:hover {
 }
 
 .mask {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -1908,7 +1907,12 @@ time:hover {
   color: rgba(0,0,0,.8);
   background-color: #fff;
   border-bottom: 1px solid #eee;
+  transition: .2s;
   outline: none
+}
+
+.search-input:focus{
+  border-color: #e26d6d
 }
 
 .search-cancel {

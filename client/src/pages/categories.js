@@ -25,7 +25,7 @@ class Category extends PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        if( this.props.category!==(nextProps.params.category||encodeURI('全部')) && nextProps.pathname.indexOf('categories')>=0 && this.props.pathname!==nextProps.pathname){
+        if( this.props.category!==(nextProps.params.category||encodeURI('全部')) && nextProps.pathname.indexOf('search')<0 && nextProps.pathname.indexOf('categories')>=0 && this.props.pathname!==nextProps.pathname){
             const {category} = nextProps.params;
             this.getArticle(category);
         }
