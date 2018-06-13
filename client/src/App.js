@@ -9,8 +9,8 @@ class App extends PureComponent {
 		return (
 			<BrowserRouter>
 				<Fragment>
-					<Route index miss cache='parent' component={Index} path="/blog" />
-					<Route cache='parent' component={Admin} path="/admin" />
+					<Route index component={Index} path="/" />
+					<Route component={Admin} path="/admin" />
 				</Fragment>
 			</BrowserRouter>
 		);

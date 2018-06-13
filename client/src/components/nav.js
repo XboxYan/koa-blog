@@ -7,9 +7,9 @@ export default () => (
             <span className='iconfont icon-menu mobile-toggle'></span>
             <div className='header-menu'>
                 <Link className='header-menu-link' activeClassName='header-menu-active' to='/admin'>首页</Link>
-                <Link className='header-menu-link' activeClassName='header-menu-active' to='/admin/archives'>文章</Link>
-                <Link className='header-menu-link' activeClassName='header-menu-active' to='/admin/categories'>分类</Link>
-                <a className='iconfont icon-words header-menu-link'>发布</a>
+                <Link className='header-menu-link' activeClassName='header-menu-active' to='/admin/article'>文章管理</Link>
+                <Link className='header-menu-link' activeClassName='header-menu-active' to='/admin/category'>分类管理</Link>
+                <Link className='iconfont icon-words header-menu-link' activeClassName='header-menu-active' to='/admin/publish'>发布</Link>
             </div>
         </nav>
     </header>
