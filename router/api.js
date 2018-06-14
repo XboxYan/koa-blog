@@ -105,7 +105,6 @@ router.get('/category', async (ctx, next) => {
         "data":[],
         "message": "",
     }
-    const { name } = ctx.request.body;
     try {
         const categories = await Categories.find();
         responseData.success = true;
@@ -190,9 +189,9 @@ router.post('/article', async (ctx, next) => {
         "success": false,
         "message": "",
     }
-    const { title,description,content,userId,categories=['未分类'] } = ctx.request.body;
+    const { title,description,content,userId,categories=[] } = ctx.request.body;
     try {
-        const article = await new Contents({ title,description,content,user:userId,categories }).save();
+        await new Contents({ title,description,content,user:userId,categories }).save();
         responseData.success = true;
         responseData.message = '发布成功';
         ctx.body = responseData;
@@ -221,7 +220,7 @@ router.get('/article', async (ctx, next) => {
         }else{
             categories = {}
         }
-        const articles = await Contents.find(categories).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).select("-user -content -comments");
+        const articles = await Contents.find(categories).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).populate('categories').select("-user -content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
@@ -248,7 +247,7 @@ router.get('/article/:id', async (ctx, next) => {
     }
     const { id } = ctx.params;
     try {
-        const article = await Contents.findById(id).populate('user','username');
+        const article = await Contents.findById(id).populate('categories');
         //阅读数+1
         //await article.update({$inc:{views:1}});
         article.views++;

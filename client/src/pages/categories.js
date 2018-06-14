@@ -14,8 +14,8 @@ class Category extends PureComponent {
 
     getArticle = async (category="") => {
         this.setState({isrender:true});
-        this.props.setTitle(decodeURI(category)||'全部');
-        const articles = await fetchData(`/api/article?category=${decodeURI(category)}`);
+        this.props.setTitle(category||'全部');
+        const articles = await fetchData(`/api/article?category=${category}`);
         this.setState({articles:articles.data,isrender:false});
     }
 
@@ -86,14 +86,14 @@ export default class extends PureComponent {
                         <h2 className="page-title"># {category}</h2>
                         {
                             categories.map(d=>(
-                                <CacheLink key={d._id} activeClassName="tag-active" to={ "/categories/"+ encodeURI(d.name) } className="tag-wrap">
+                                <CacheLink key={d._id} activeClassName="tag-active" to={ "/categories/"+ d._id } className="tag-wrap">
                                     <span className="iconfont icon-tag-inner"></span>
                                     <span className="tag-name"> {d.name} </span>
                                 </CacheLink>
                             ))
                         }
                     </section>
-                    <Route index component={Category} category={encodeURI(category)} setTitle={this.setTitle} path="/:category" />                
+                    <Route index component={Category} category={category} setTitle={this.setTitle} path="/:category" />                
                 </section>
                 <Footer />
             </div>
