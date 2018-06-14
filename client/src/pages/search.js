@@ -13,20 +13,17 @@ export default class extends PureComponent {
 
     getArticles = async (keywords) => {
         this.setState({ isrender: true });
-        if (keywords) {
-            const articles = await fetchData('/api/search?keywords=' + keywords);
-            this.setState({ data: articles.data, isrender: false });
-        } else {
-            this.setState({ data: [], isrender: false });
-        }
+        const articles = await fetchData('/api/search?keywords=' + keywords);
+        this.setState({ data: articles.data, isrender: false });
     }
 
     search = (ev) => {
         const { value } = ev.target;
-        this.setState({ keywords: value.replace(/\s+/g, "") });
+        const keywords = value.replace(/\s+/g, "");
+        this.setState({ keywords });
         this.timer && clearTimeout(this.timer);
         this.timer = setTimeout(() => {
-            this.getArticles(value);
+            keywords&&this.getArticles(keywords);
         }, 500)
     }
 
@@ -54,7 +51,7 @@ export default class extends PureComponent {
                                                 </div>
                                             ))
                                             :
-                                            <div className="iconfont icon-nofound search-empty"></div>
+                                            <div className="iconfont icon-nofound empty"></div>
                                     )
                             )
                         }

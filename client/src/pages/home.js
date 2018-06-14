@@ -3,6 +3,7 @@ import Loader from '../components/loader';
 import Profile from '../components/profile';
 import BackTop from '../components/backTop';
 import Footer from '../components/footer';
+import Pager from '../components/pager';
 import fetchData from '../util/Fetch';
 import { CacheLink } from 'react-keeper';
 import moment from 'moment';
@@ -14,21 +15,14 @@ export default class extends PureComponent {
     state = {
         articles:[],
         total:1,
-        page:1,
         isrender:true
     }
 
     getArticle = async (page=1) => {
         this.goTop();
-        this.setState({isrender:true,page});
+        this.setState({isrender:true});
         const articles = await fetchData(`/api/article?page=${page}&pagesize=${this.pagesize}`);
         this.setState({articles:articles.data,total:articles.counts,isrender:false});
-    }
-
-    onhandle = (dir) => () => {
-        const { total, page } = this.state;
-        let $page = Math.max(Math.min(page + dir,Math.ceil(total/this.pagesize)),1);
-        this.getArticle($page);
     }
 
     toIndex = () => {
@@ -44,8 +38,7 @@ export default class extends PureComponent {
     }
     
     render() {
-        const {articles,page,total,isrender} = this.state;
-        const max = Math.ceil(total/this.pagesize);
+        const {articles,total,isrender} = this.state;
         return (
             <div className="container" id="index-con">
                 <section className="main sildeUpMin">
@@ -75,11 +68,11 @@ export default class extends PureComponent {
                             </article>
                         ))
                     }
-                    <nav className="paginator scrollIn">
-                        <a className="prev" data-hidden={page===1} onClick={this.onhandle(-1)}><i className="iconfont icon-left"></i>上一页</a>
-                        <span className="page-number">Page {page} / {max}.</span>
-                        <a className="next" data-hidden={page===max} onClick={this.onhandle(1)}>下一页<i className="iconfont icon-right"></i></a>
-                    </nav>
+                    <Pager
+                        total={total}
+                        pagesize={this.pagesize}
+                        fetch={this.getArticle}
+                    />
                 </section>
                 <BackTop onClick={this.goTop} />
                 <Footer/>

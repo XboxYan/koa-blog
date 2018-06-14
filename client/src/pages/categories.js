@@ -39,12 +39,16 @@ class Category extends PureComponent {
                     isrender?
                     <Loader/>
                     :
-                    articles.map(article=>(
-                        <article className="item" key={article._id}>
-                            <time className="item-date"> {moment(article.createdAt).utcOffset(8).format("YYYY年M月D日")}</time>
-                            <CacheLink className="item-title" to={"/article/"+article._id}>{article.title}</CacheLink>
-                        </article>
-                    ))
+                    (
+                        articles.length>0?articles.map(article=>(
+                            <article className="item" key={article._id}>
+                                <time className="item-date"> {moment(article.createdAt).utcOffset(8).format("YYYY年M月D日")}</time>
+                                <CacheLink className="item-title" to={"/article/"+article._id}>{article.title}</CacheLink>
+                            </article>
+                        ))
+                        :
+                        <div className="iconfont icon-nofound empty"></div>
+                    )
                 }
             </section>
         )

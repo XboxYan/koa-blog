@@ -78,6 +78,15 @@
     border-radius: 6px;
 }
 
+::selection{
+  background: #e26d6d;
+  color: #fff;
+}
+
+input{
+  caret-color:#e26d6d;
+}
+
 .app {
   position: absolute;
   left: 0;
@@ -95,11 +104,12 @@
 }
 
 .tag-wrap {
+  color: rgba(0,0,0,.75);
   margin: 3px 2px;
   padding: .5rem .825rem;
   line-height: 1.825rem;
   font-size: .825rem;
-  border: 1px solid #d5dce5;
+  border: 1px solid #eee;
   border-radius: 999em;
   transition: all .2s ease
 }
@@ -114,11 +124,11 @@
   border: 1px solid #e26d6d
 }
 
-.article-bottom .article-readmore:hover,.article-meta>.article-tag:hover,.pf-paginator a:hover,.post-meta>a:hover {
-  border: 1px solid hsla(0,67%,66%,.5)
+.article-bottom .article-readmore:hover,.article-tag:hover,.pf-paginator a:hover,.post-meta>a:hover {
+  border: 1px solid #e26d6d
 }
 
-.article-meta>.article-tag,.post-meta>a {
+.article-tag,.post-meta>a {
   display: inline-block;
   padding: 3px 6px;
   border: 1px solid #eee;
@@ -159,25 +169,12 @@
   width: 160px;
   margin-left: -80px;
   font-size: 16.5px;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: #fff!important;
   background: #40484a;
   text-shadow: 0 -1px 0 #000;
   border-radius: 4px;
   text-align: center
-}
-
-@-webkit-keyframes tipsAnimation {
-  0% {
-      transform: translateY(10px);
-      opacity: .8
-  }
-
-  to {
-      transform: translateY(-4px);
-      opacity: 1
-  }
 }
 
 @keyframes tipsAnimation {
@@ -370,16 +367,6 @@ td,th {
   animation-duration: .8s
 }
 
-@-webkit-keyframes fadeIn {
-  0% {
-      opacity: 0
-  }
-
-  to {
-      opacity: 1
-  }
-}
-
 @keyframes fadeIn {
   0% {
       opacity: 0
@@ -387,16 +374,6 @@ td,th {
 
   to {
       opacity: 1
-  }
-}
-
-@-webkit-keyframes slideUp {
-  0% {
-      transform: translateY(0)
-  }
-
-  to {
-      transform: translateY(-100px)
   }
 }
 
@@ -410,16 +387,6 @@ td,th {
   }
 }
 
-@-webkit-keyframes slideDown {
-  0% {
-      transform: translateY(-100px)
-  }
-
-  to {
-      transform: translateY(0)
-  }
-}
-
 @keyframes slideDown {
   0% {
       transform: translateY(-100px)
@@ -430,33 +397,9 @@ td,th {
   }
 }
 
-@-webkit-keyframes slideDownMin {
-  0% {
-      transform: translateY(-30px);
-      opacity: 0
-  }
-
-  to {
-      transform: translateY(0);
-      opacity: 1
-  }
-}
-
 @keyframes slideDownMin {
   0% {
       transform: translateY(-30px);
-      opacity: 0
-  }
-
-  to {
-      transform: translateY(0);
-      opacity: 1
-  }
-}
-
-@-webkit-keyframes sildeUpMin {
-  0% {
-      transform: translateY(30px);
       opacity: 0
   }
 
@@ -478,16 +421,6 @@ td,th {
   }
 }
 
-@-webkit-keyframes menuSlideIn {
-  0% {
-      transform: translateX(-200px)
-  }
-
-  to {
-      transform: translateX(0)
-  }
-}
-
 @keyframes menuSlideIn {
   0% {
       transform: translateX(-200px)
@@ -498,16 +431,6 @@ td,th {
   }
 }
 
-@-webkit-keyframes menuSlideOut {
-  0% {
-      transform: translateX(0)
-  }
-
-  to {
-      transform: translateX(-200px)
-  }
-}
-
 @keyframes menuSlideOut {
   0% {
       transform: translateX(0)
@@ -515,18 +438,6 @@ td,th {
 
   to {
       transform: translateX(-200px)
-  }
-}
-
-@-webkit-keyframes scrollIn {
-  0% {
-      transform: translateY(50px);
-      opacity: 0
-  }
-
-  to {
-      transform: translateY(0);
-      opacity: 1
   }
 }
 
@@ -542,18 +453,6 @@ td,th {
   }
 }
 
-@-webkit-keyframes leftIn {
-  0% {
-      transform: translateX(100px);
-      opacity: 0
-  }
-
-  to {
-      transform: translateX(0);
-      opacity: 1
-  }
-}
-
 @keyframes leftIn {
   0% {
       transform: translateX(100px);
@@ -563,18 +462,6 @@ td,th {
   to {
       transform: translateX(0);
       opacity: 1
-  }
-}
-
-@-webkit-keyframes rightOut {
-  0% {
-      transform: translateX(0);
-      opacity: 1
-  }
-
-  to {
-      transform: translateX(100px);
-      opacity: 0
   }
 }
 
@@ -627,7 +514,6 @@ pre code {
 .highlight {
   border-radius: 6px;
   text-shadow: 1px 2px 1px rgba(0,0,0,.009);
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
   box-shadow: 0 1px 2px rgba(0,0,0,.05)
 }
 
@@ -706,9 +592,6 @@ pre code {
 }
 
 .gutter {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none
 }
 
@@ -827,7 +710,6 @@ pre .javascript .function,pre .keyword {
 p code {
   padding: 2px 8px;
   text-shadow: 1px 2px 1px rgba(0,0,0,.02);
-  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.05);
   box-shadow: 0 2px 2px rgba(0,0,0,.05);
   font-size: 13.5px;
   color: #4d4d4c;
@@ -1103,7 +985,6 @@ p code {
 }
 
 * {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box
 }
 
@@ -1132,8 +1013,6 @@ body {
 
 a {
   text-decoration: none;
-  -webkit-transition: all .2s ease;
-  -o-transition: all .2s ease;
   transition: all .2s ease
 }
 
@@ -1193,7 +1072,7 @@ time:hover {
   width: 100%;
   height: 100%;
   z-index: 998;
-  background-color: rgba(0,0,0,.04)
+  background-color: rgba(0,0,0,.2)
 }
 
 .backTop {
@@ -1267,12 +1146,12 @@ time:hover {
 }
 
 .header-menu-link {
+  position: relative;
   margin: 0 .85rem;
   font-size: .9rem;
   display: inline-block;
   letter-spacing: 1px
 }
-
 
 .header-fixed {
   position: fixed;
@@ -1281,8 +1160,6 @@ time:hover {
   left: 0;
   opacity: .8;
   background-color: #fff;
-  -webkit-transition: all .6s;
-  -o-transition: all .6s;
   transition: all .6s
 }
 
@@ -1295,20 +1172,14 @@ time:hover {
 }
 
 .slide-right {
-  -webkit-transform: translateX(200px);
-  -ms-transform: translateX(200px);
   transform: translateX(200px)
 }
 
 .slide-left,.slide-right {
-  -webkit-transition: .5s;
-  -o-transition: .5s;
   transition: .5s
 }
 
 .slide-left {
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
   transform: translateX(0)
 }
 
@@ -1426,7 +1297,6 @@ time:hover {
   padding: 20px 0;
   text-align: center;
   border-radius: 10px;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.05);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.05)
 }
 
@@ -1477,7 +1347,6 @@ time:hover {
   padding: 20px 0;
   text-align: center;
   border-radius: 10px;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,.05);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.05)
 }
 
@@ -1509,15 +1378,12 @@ time:hover {
   position: relative;
   border: .5px solid #eee;
   border-radius: 4px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 11px;
   margin-bottom: 4rem;
   text-align: right;
-  -webkit-box-sizing: content-box;
   box-sizing: content-box
 }
 
@@ -1532,7 +1398,6 @@ time:hover {
   padding: 1px;
   border: 1px solid #eee;
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.06);
   box-shadow: 0 2px 2px rgba(0,0,0,.06)
 }
 
@@ -1547,8 +1412,6 @@ time:hover {
 }
 
 .pf-right {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   flex-direction: column
 }
@@ -1585,10 +1448,7 @@ time:hover {
   padding: 1px;
   border: 1px solid #eee;
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.06);
   box-shadow: 0 2px 2px rgba(0,0,0,.06);
-  -webkit-transition: all .1s ease-in;
-  -o-transition: all .1s ease-in;
   transition: all .1s ease-in;
   cursor: pointer
 }
@@ -1660,15 +1520,12 @@ time:hover {
   padding: 8px 12px;
   border-radius: 40px;
   border: 1px solid #eee;
-  -webkit-box-sizing: content-box;
   box-sizing: content-box;
   text-align: center
 }
 
 .thumb {
   margin: 0 .8rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex
 }
 
@@ -1699,8 +1556,6 @@ time:hover {
 
 .gallery-thumb {
   margin: 0 .8rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex
 }
 
@@ -1713,7 +1568,6 @@ time:hover {
 
 .gallery {
   border-radius: 2px;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 25%;
   margin: 0 .1rem;
@@ -1911,6 +1765,41 @@ time:hover {
   outline: none
 }
 
+.edit-container {
+  position: fixed;
+  left: 50%;
+  top: 40%;
+  z-index: 999;
+  width: 300px;
+  display: flex;
+  overflow: hidden;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 10px;
+  align-items: center;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.05);
+}
+
+.edit-input {
+  padding: 16px 0 16px 20px;
+  flex: 1;
+  border: none;
+  font-size: 1rem;
+  color: rgba(0,0,0,.8);
+  background-color: #fff;
+  transition: .2s;
+  outline: none
+}
+
+.edit-cancel{
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  margin-right: 10px;
+}
+
 .search-input:focus{
   border-color: #e26d6d
 }
@@ -1955,9 +1844,12 @@ time:hover {
   color: rgba(0,0,0,.7)
 }
 
-.search-empty {
-  margin: 20px 0 24px;
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
+  min-height: 30vh;
   text-align: center
 }
 
@@ -2278,48 +2170,69 @@ time:hover {
 
 .gImg {
   display: block;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: none
 }
 
-.gSlideDown {
-  -webkit-animation-fill-mode: forwards;
+.gSlideDown { 
   animation-fill-mode: forwards;
-  -webkit-animation-name: gSlideDown;
   animation-name: gSlideDown;
-  -webkit-animation-duration: .2s;
   animation-duration: .2s;
-  -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
-  -webkit-animation-delay: 0s;
   animation-delay: 0s
-}
-
-@-webkit-keyframes gSlideDown {
-  0% {
-      -webkit-transform: translateY(-15px);
-      transform: translateY(-15px);
-      opacity: .7
-  }
-
-  to {
-      opacity: 1;
-      -webkit-transform: translateY(0);
-      transform: translateY(0)
-  }
 }
 
 @keyframes gSlideDown {
   0% {
-      -webkit-transform: translateY(-15px);
       transform: translateY(-15px);
       opacity: .7
   }
 
   to {
       opacity: 1;
-      -webkit-transform: translateY(0);
       transform: translateY(0)
   }
+}
+
+.table-con{
+  width: 100%;
+}
+
+.table-con th{
+  
+  background: #e26d6d;
+  color: #fff;
+  height: 40px;
+  border: 0;
+}
+
+.table-con td{
+  text-align: center;
+  word-wrap: break-word;
+  word-break: break-all;
+  border: 0;
+  height: 40px;
+}
+
+.table-con tbody tr{
+  transition: .2s;
+  border-bottom: 1px solid #eee;
+}
+
+.table-con tbody tr:hover{
+  background: #f9f9f9
+}
+
+.table-con tbody tr td:nth-child(2),.table-con tbody tr td:nth-child(5){
+  text-align: left;
+}
+
+.table-con .tag-wrap{
+  line-height: inherit;
+  padding: 3px 12px;
+  margin: 3px;
+}
+
+.table-con .article-tag{
+  margin: 3px;
 }

@@ -80,10 +80,17 @@ router.post('/category', async (ctx, next) => {
     }
     const { name } = ctx.request.body;
     try {
-        const category = await new Categories({ name }).save();
-        responseData.success = true;
-        responseData.message = '新增分类成功';
-        ctx.body = responseData;
+        const categoryInfo = await Categories.findOne({name});
+        if(categoryInfo){
+            responseData.success = false;
+            responseData.message = "该分类已存在";
+            ctx.body = responseData;
+        }else{
+            await new Categories({ name }).save();
+            responseData.success = true;
+            responseData.message = '新增分类成功';
+            ctx.body = responseData;
+        }
     } catch (error) {
         responseData.success = false;
         responseData.message = error.message;
@@ -109,6 +116,70 @@ router.get('/category', async (ctx, next) => {
         responseData.success = false;
         responseData.message = error.message;
         responseData.data = [];
+        ctx.body = responseData;
+    }
+});
+
+//删除分类
+router.delete('/category', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+    }
+    const { name } = ctx.request.body;
+    if( name === '未分类' ){
+        responseData.success = false;
+        responseData.message = "默认分类不允许删除";
+        ctx.body = responseData;
+        return false;
+    }
+    try {
+        const categoryInfo = await Categories.findOne({name});
+        if(categoryInfo){
+            await Categories.remove({name});
+            responseData.success = true;
+            responseData.message = "删除成功";
+            ctx.body = responseData;
+        }else{
+            responseData.success = false;
+            responseData.message = '该分类不存在';
+            ctx.body = responseData;
+        }
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        ctx.body = responseData;
+    }
+});
+
+//修改分类
+router.put('/category', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+    }
+    const { name,id } = ctx.request.body;
+    if( name === '未分类' ){
+        responseData.success = false;
+        responseData.message = "默认分类不允许修改";
+        ctx.body = responseData;
+        return false;
+    }
+    try {
+        const categoryInfo = await Categories.findById(id);
+        if(categoryInfo){
+            await Categories.update({_id: id},{name});
+            responseData.success = true;
+            responseData.message = "修改成功";
+            ctx.body = responseData;
+        }else{
+            responseData.success = false;
+            responseData.message = '该分类不存在';
+            ctx.body = responseData;
+        }
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
         ctx.body = responseData;
     }
 });
@@ -150,7 +221,7 @@ router.get('/article', async (ctx, next) => {
         }else{
             categories = {}
         }
-        const articles = await Contents.find(categories).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).select("-user -views -content -comments");
+        const articles = await Contents.find(categories).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).select("-user -content -comments");
         const counts = await Contents.count();
         responseData.success = true;
         responseData.message = '操作成功';
