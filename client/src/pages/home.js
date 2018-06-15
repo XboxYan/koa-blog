@@ -53,9 +53,13 @@ export default class extends PureComponent {
                                     <CacheLink className="article-title" to={"/article/"+article._id}>{article.title}</CacheLink>
                                     <div className="article-meta">{ moment(article.createdAt).utcOffset(8).format("YYYY年M月D日") }<span className="iconfont icon-star"></span>
                                         {
+                                            article.categories.length>0
+                                            ?
                                             article.categories.map((category,i)=>(
                                                 <CacheLink key={i} className="article-tag" to={"/categories/"+category._id}>{category.name}</CacheLink>
                                             ))
+                                            :
+                                            <CacheLink className="article-tag" to="/categories">无分类</CacheLink>
                                         }
                                     </div>
                                 </div>

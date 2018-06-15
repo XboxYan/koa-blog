@@ -56,7 +56,7 @@ export default class extends PureComponent {
                                         <td><CacheLink to={"/article/"+article._id}>{article.title}</CacheLink></td>
                                         <td>{moment(article.createdAt).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</td>
                                         <td>{article.views}</td>
-                                        <td>{article.categories.map((category,i)=><CacheLink key={i} className="article-tag" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>)}</td>
+                                        <td>{article.categories.map((category,i)=><CacheLink key={i} className="article-tag" to={"/categories/"+category._id}>{category.name}</CacheLink>)}</td>
                                         <td>
                                             <a className="tag-wrap">编辑</a>
                                             <a className="tag-wrap">删除</a>

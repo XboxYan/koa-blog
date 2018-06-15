@@ -54,7 +54,10 @@ export default class extends PureComponent {
                             <div className="post-meta">
                                 <i className="iconfont icon-tag-inner"></i>
                                 {
-                                    data.categories && data.categories.map((category, i) => <CacheLink key={i} className="category-link" to={"/categories/"+encodeURI(category)}>{category}</CacheLink>)
+                                    data.categories.length>0? 
+                                    data.categories.map((category, i) => <CacheLink key={i} className="category-link" to={"/categories/"+category._id}>{category.name}</CacheLink>)
+                                    :
+                                    <CacheLink className="category-link" to="/categories">无分类</CacheLink>
                                 }
                             </div>
                         </article>

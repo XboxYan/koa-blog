@@ -125,17 +125,12 @@ router.delete('/category', async (ctx, next) => {
         "success": false,
         "message": "",
     }
-    const { name } = ctx.request.body;
-    if( name === '未分类' ){
-        responseData.success = false;
-        responseData.message = "默认分类不允许删除";
-        ctx.body = responseData;
-        return false;
-    }
+    const { id } = ctx.request.body;
     try {
-        const categoryInfo = await Categories.findOne({name});
+        const categoryInfo = await Categories.findById(id);
         if(categoryInfo){
-            await Categories.remove({name});
+            await categoryInfo.remove();
+            await Contents.updateMany({categories:id},{$pull:{categories:id}});
             responseData.success = true;
             responseData.message = "删除成功";
             ctx.body = responseData;
@@ -158,16 +153,10 @@ router.put('/category', async (ctx, next) => {
         "message": "",
     }
     const { name,id } = ctx.request.body;
-    if( name === '未分类' ){
-        responseData.success = false;
-        responseData.message = "默认分类不允许修改";
-        ctx.body = responseData;
-        return false;
-    }
     try {
         const categoryInfo = await Categories.findById(id);
         if(categoryInfo){
-            await Categories.update({_id: id},{name});
+            await categoryInfo.update({name});
             responseData.success = true;
             responseData.message = "修改成功";
             ctx.body = responseData;

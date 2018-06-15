@@ -37,7 +37,7 @@ export default class extends PureComponent {
                                 !isrender && categories.map(category => (
                                     <tr key={category._id}>
                                         <td>{category._id}</td>
-                                        <td><CacheLink to={"/categories/" + encodeURI(category.name)}>{category.name}</CacheLink></td>
+                                        <td><CacheLink to={"/categories/" + category._id}>{category.name}</CacheLink></td>
                                         <td>{moment(category.createdAt).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</td>
                                         <td>
                                             <CacheLink className="tag-wrap" state={{name:category.name,id:category._id}} to="/admin/category/edit">编辑</CacheLink>
