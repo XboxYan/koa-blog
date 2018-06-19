@@ -57,7 +57,7 @@ export default class extends PureComponent {
                                     data.categories.length>0? 
                                     data.categories.map((category, i) => <CacheLink key={i} className="category-link" to={"/categories/"+category._id}>{category.name}</CacheLink>)
                                     :
-                                    <CacheLink className="category-link" to="/categories">无分类</CacheLink>
+                                    <CacheLink className="category-link" to="/categories/unknown">未分类</CacheLink>
                                 }
                             </div>
                         </article>

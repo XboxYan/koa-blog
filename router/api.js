@@ -106,7 +106,7 @@ router.get('/category', async (ctx, next) => {
         "message": "",
     }
     try {
-        const categories = await Categories.find();
+        const categories = await Categories.find().sort({createdAt:-1});
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.data = categories;
@@ -205,12 +205,16 @@ router.get('/article', async (ctx, next) => {
     try {
         let categories = {}
         if(category){
-            categories.categories = category;
+            if(category==='unknown'){
+                categories.categories = [];
+            }else{
+                categories.categories = category;
+            }
         }else{
             categories = {}
         }
         const articles = await Contents.find(categories).sort({createdAt:-1}).limit(~~pagesize).skip(~~skip).populate('categories').select("-user -content -comments");
-        const counts = await Contents.count();
+        const counts = await Contents.find(categories).count();
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.data = articles;

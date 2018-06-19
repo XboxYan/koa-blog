@@ -59,7 +59,7 @@ export default class extends PureComponent {
                                                 <CacheLink key={i} className="article-tag" to={"/categories/"+category._id}>{category.name}</CacheLink>
                                             ))
                                             :
-                                            <CacheLink className="article-tag" to="/categories">无分类</CacheLink>
+                                            <CacheLink className="article-tag" to="/categories/unknown">未分类</CacheLink>
                                         }
                                     </div>
                                 </div>

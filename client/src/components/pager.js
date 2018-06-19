@@ -18,11 +18,13 @@ export default class extends PureComponent {
         const max = Math.ceil(total / pagesize);
         const { page } = this.state;
         return (
+            total?
             <nav className="paginator scrollIn">
                 <a className="prev" data-hidden={page === 1} onClick={this.go(-1)}><i className="iconfont icon-left"></i>上一页</a>
                 <span className="page-number">Page {page} / {max}.</span>
                 <a className="next" data-hidden={page === max} onClick={this.go(1)}>下一页<i className="iconfont icon-right"></i></a>
             </nav>
+            :null
         )
     }
 }

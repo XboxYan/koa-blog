@@ -129,6 +129,7 @@ input{
 }
 
 .article-tag,.post-meta>a {
+  cursor: pointer;
   display: inline-block;
   padding: 3px 6px;
   border: 1px solid #eee;
