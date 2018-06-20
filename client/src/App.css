@@ -87,6 +87,59 @@ input{
   caret-color:#e26d6d;
 }
 
+h1,h2,h3,h4,h5,h6 {
+  line-height: 1.65;
+  color: #111;
+  word-spacing: .5px;
+  font-weight: 300
+}
+
+h1 {
+  margin: 1.4em 0;
+  font-size: 26px
+}
+
+h2,h3 {
+  margin: 1.3em 0;
+  font-size: 23px
+}
+
+h4,h5,h6 {
+  margin: 1.2em 0;
+  font-size: 18px
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 28px 0
+}
+
+table,th {
+  font-size: 14px
+}
+
+td,th {
+  border: 1px solid #ddd;
+  padding: .4rem 1rem;
+  font-weight: 300;
+  margin: 28px 0
+}
+
+blockquote {
+  display: block;
+  letter-spacing: .4px;
+  font-size: 15px;
+  padding: 0 12px;
+  margin: 1.5rem 0
+}
+
+blockquote p {
+  margin: 0;
+  padding-left: 10px;
+  border-left: 3px solid #eee
+}
+
 .app {
   position: absolute;
   left: 0;
@@ -179,6 +232,13 @@ input{
   text-align: center
 }
 
+.article-excerpt p,.post-content p {
+  font-weight: 300;
+  margin: 1em 0;
+  line-height: 2;
+  font-size: .88rem
+}
+
 @keyframes tipsAnimation {
   0% {
       transform: translateY(10px);
@@ -189,101 +249,6 @@ input{
       transform: translateY(-4px);
       opacity: 1
   }
-}
-
-h1,h2,h3,h4,h5,h6 {
-  line-height: 1.65;
-  color: #111;
-  word-spacing: .5px;
-  font-weight: 300
-}
-
-h1 {
-  margin: 1.4em 0;
-  font-size: 26px
-}
-
-h2,h3 {
-  margin: 1.3em 0;
-  font-size: 23px
-}
-
-h4,h5,h6 {
-  margin: 1.2em 0;
-  font-size: 18px
-}
-
-.article-excerpt p,.post-content p {
-  font-weight: 300;
-  margin: 1em 0;
-  line-height: 2;
-  font-size: .88rem
-}
-
-strong {
-  font-weight: 500
-}
-
-blockquote {
-  display: block;
-  letter-spacing: .4px;
-  font-size: 15px;
-  padding: 0 12px;
-  margin: 2rem 0
-}
-
-blockquote p {
-  margin: 0;
-  padding-left: 10px;
-  border-left: 3px solid #eee
-}
-
-hr {
-  margin: 1em 0;
-  opacity: .2;
-  border: .2px solid #eee
-}
-
-ol,ul {
-  margin-left: 22px;
-  padding-left: 0
-}
-
-ol p,ul p {
-  margin: 0
-}
-
-li {
-  font-size: 15px;
-  margin: 8px 0;
-  list-style-type: none;
-  position: relative
-}
-
-li:before {
-  position: absolute;
-  left: -12px;
-  top: 0;
-  content: "-";
-  width: 2px;
-  height: 2px
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin: 28px 0
-}
-
-table,th {
-  font-size: 14px
-}
-
-td,th {
-  border: 1px solid #ddd;
-  padding: .4rem 1rem;
-  font-weight: 300;
-  margin: 28px 0
 }
 
 .article-excerpt h1,.article-excerpt h2,.article-excerpt h3,.article-excerpt h4,.article-excerpt h5,.article-excerpt h6 {
@@ -483,256 +448,6 @@ body {
   width: 100%
 }
 
-.highlight,pre {
-  overflow: auto;
-  margin: 20px 0;
-  padding: 0;
-  font-size: 13.5px;
-  color: #4d4d4c;
-  background: #fcfdfd
-}
-
-code,pre {
-  font-family: consolas
-}
-
-code {
-  padding: 2px 4px;
-  word-wrap: break-word;
-  font-size: 13.5px
-}
-
-pre {
-  padding: 10px
-}
-
-pre code {
-  padding: 0;
-  color: #4d4d4c;
-  background: none;
-  text-shadow: none
-}
-
-.highlight {
-  border-radius: 6px;
-  text-shadow: 1px 2px 1px rgba(0,0,0,.009);
-  box-shadow: 0 1px 2px rgba(0,0,0,.05)
-}
-
-.highlight pre {
-  border: none;
-  margin: 0;
-  padding: 10px 0
-}
-
-.highlight table {
-  margin: 0;
-  width: auto;
-  border: none
-}
-
-.highlight td {
-  border: none;
-  padding: 0
-}
-
-.highlight figcaption {
-  font-size: 1em;
-  color: #4d4d4c;
-  line-height: 1em;
-  margin-bottom: 1em
-}
-
-.highlight figcaption:after,.highlight figcaption:before {
-  content: " ";
-  display: table
-}
-
-.highlight figcaption:after {
-  clear: both
-}
-
-.highlight figcaption a {
-  float: right;
-  color: #4d4d4c
-}
-
-.highlight figcaption a:hover {
-  border-bottom-color: #4d4d4c
-}
-
-.highlight .gutter pre {
-  margin: 0;
-  text-align: right;
-  font-size: 12px;
-  color: #606a6d;
-  font-family: Arial,"sans-serif"
-}
-
-.highlight .code pre,.highlight .gutter pre {
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: #fcfdfd
-}
-
-.highlight .code pre {
-  width: 100%
-}
-
-.highlight .line {
-  display: inline-block;
-  padding: 2px 0;
-  height: 20px;
-  border: none
-}
-
-.highlight .marked {
-  width: 100%;
-  border-left: 2px solid #727272;
-  margin: .5em 0;
-  padding-left: .5em
-}
-
-.gutter {
-  user-select: none
-}
-
-.gist table {
-  width: auto
-}
-
-.gist table td {
-  border: none
-}
-
-pre .deletion {
-  background: #fdd
-}
-
-pre .addition {
-  background: #dfd
-}
-
-pre .meta {
-  color: #8959a8
-}
-
-pre .comment {
-  color: #8e908c
-}
-
-pre .attribute,pre .name,pre .css .class,pre .css .id,pre .css .pseudo,pre .html .doctype,pre .regexp,pre .ruby .constant,pre .variable,pre .xml .doctype,pre .xml .pi,pre .xml .tag .title {
-  color: #e24c38
-}
-
-pre .tag{
-  color: #8e908c
-}
-
-pre .attr{
-  color: #3e999f
-}
-
-pre .built_in,pre .command,pre .constant,pre .literal,pre .number,pre .params,pre .preprocessor {
-  color: #e78c45
-}
-
-pre .formula,pre .header,pre .inheritance,pre .number,pre .ruby .class .title,pre .ruby .symbol,pre .special,pre .string,pre .value,pre .xml .cdata {
-  color: #718c00
-}
-
-pre .css .hexcolor,pre .title {
-  color: #3e999f
-}
-
-pre .css .hexcolor,pre .title {
-  color: #3e999f
-}
-
-pre .css .selector-class {
-  color: #3e999f
-}
-
-pre .css .attribute {
-  color: #8293ef
-}
-
-pre .coffeescript .title,pre .function,pre .javascript .title,pre .perl .sub,pre .python .decorator,pre .python .title,pre .ruby .function .title,pre .ruby .title .keyword {
-  color: #4271ae
-}
-
-pre .javascript .function,pre .keyword {
-  color: #e24c38
-}
-
-pre {
-  position: relative;
-  width: 100%
-}
-
-pre code:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: #ccc;
-  content: "Code";
-  font-size: 12px;
-  padding: 5px 10px 0;
-  height: 15px
-}
-
-code.html:after {
-  content: "HTML"
-}
-
-code.javascript:after,code.js:after {
-  content: "JS"
-}
-
-code.bash:after {
-  content: "Shell"
-}
-
-code.css:after {
-  content: "CSS"
-}
-
-code.sass:after {
-  content: "SASS"
-}
-
-code.less:after {
-  content: "LESS"
-}
-
-code.style:after {
-  content: "Style"
-}
-
-code.java:after {
-  content: "Java"
-}
-
-code.c:after {
-  content: "C"
-}
-
-code.yml:after {
-  content: "YML"
-}
-
-code.php:after {
-  content: "PHP"
-}
-
-p code {
-  padding: 2px 8px;
-  text-shadow: 1px 2px 1px rgba(0,0,0,.02);
-  box-shadow: 0 2px 2px rgba(0,0,0,.05);
-  font-size: 13.5px;
-  color: #4d4d4c;
-  background: #fcfdfd
-}
 
 @font-face {
   font-family: iconfont;
@@ -1023,6 +738,294 @@ body {
   font: 300 14px -apple-system,BlinkMacSystemFont,Open Sans,Microsoft YaHei,Arial,"sans-serif"
 }
 
+/**/
+hr {
+  margin: 1em 0;
+  border:0;
+  border-top: 1px solid #eee;
+}
+
+ol,ul {
+  margin-left: 22px;
+  padding-left: 0
+}
+
+ol p,ul p {
+  margin: 0
+}
+
+li {
+  font-size: 15px;
+  margin: 8px 0;
+  list-style-type: none;
+  position: relative
+}
+
+ul li:before {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  content: "-";
+  width: 2px;
+  height: 2px
+}
+
+ol {
+  counter-reset:count;
+}
+
+ol li:before {
+  position: absolute;
+  left: -15px;
+  top: 0;
+  content: counter(count) '.'; 
+  counter-increment: count;
+  width: 2px;
+  height: 2px
+}
+
+pre {
+  overflow: auto;
+  margin: 20px 0;
+  font-size: 13.5px;
+  color: #4d4d4c;
+  background: #fcfdfd
+}
+
+code,pre {
+  font-family: consolas
+}
+
+code {
+  padding: 2px 4px;
+  word-wrap: break-word;
+  font-size: 13.5px
+}
+
+pre code {
+  padding: 0;
+  color: #4d4d4c;
+  background: none;
+  text-shadow: none
+}
+
+pre {
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 6px;
+  text-shadow: 1px 2px 1px rgba(0,0,0,.009);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05)
+}
+
+pre table {
+  margin: 0;
+  width: auto;
+  border: none
+}
+
+pre td {
+  border: none;
+  padding: 0
+}
+
+pre figcaption {
+  font-size: 1em;
+  color: #4d4d4c;
+  line-height: 1em;
+  margin-bottom: 1em
+}
+
+pre figcaption:after,.highlight figcaption:before {
+  content: " ";
+  display: table
+}
+
+pre figcaption:after {
+  clear: both
+}
+
+pre figcaption a {
+  float: right;
+  color: #4d4d4c
+}
+
+pre figcaption a:hover {
+  border-bottom-color: #4d4d4c
+}
+
+pre .gutter pre {
+  margin: 0;
+  text-align: right;
+  font-size: 12px;
+  color: #606a6d;
+  font-family: Arial,"sans-serif"
+}
+
+pre .code pre,pre .gutter pre {
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #fcfdfd
+}
+
+pre .code pre {
+  width: 100%
+}
+
+pre .line, pre hr {
+  display: inline-block;
+  padding: 2px 0;
+  height: 20px;
+  border: none
+}
+
+pre .marked {
+  width: 100%;
+  border-left: 2px solid #727272;
+  margin: .5em 0;
+  padding-left: .5em
+}
+
+.gutter {
+  user-select: none
+}
+
+.gist table {
+  width: auto
+}
+
+.gist table td {
+  border: none
+}
+
+pre .deletion {
+  background: #fdd
+}
+
+pre .addition {
+  background: #dfd
+}
+
+pre .meta {
+  color: #8959a8
+}
+
+pre .comment {
+  color: #8e908c
+}
+
+pre .attribute,pre .name,pre .css .class,pre .css .id,pre .css .pseudo,pre .html .doctype,pre .regexp,pre .ruby .constant,pre .variable,pre .xml .doctype,pre .xml .pi,pre .xml .tag .title {
+  color: #e24c38
+}
+
+pre .tag{
+  color: #8e908c
+}
+
+pre .attr{
+  color: #3e999f
+}
+
+pre .built_in,pre .command,pre .constant,pre .literal,pre .number,pre .params,pre preprocessor {
+  color: #e78c45
+}
+
+pre .formula,pre .header,pre .inheritance,pre .number,pre .ruby .class .title,pre .ruby .symbol,pre .special,pre .string,pre .value,pre .xml .cdata {
+  color: #718c00
+}
+
+pre .css .hexcolor,pre .title {
+  color: #3e999f
+}
+
+pre .css .hexcolor,pre .title {
+  color: #3e999f
+}
+
+pre .css .selector-class {
+  color: #3e999f
+}
+
+pre .css .attribute {
+  color: #8293ef
+}
+
+pre .coffeescript .title,pre .function,pre .javascript .title,pre .perl .sub,pre .python .decorator,pre .python .title,pre .ruby .function .title,pre .ruby .title .keyword {
+  color: #4271ae
+}
+
+pre .javascript .function,pre .keyword {
+  color: #e24c38
+}
+
+pre {
+  position: relative;
+  width: 100%
+}
+
+pre code:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ccc;
+  content: "Code";
+  font-size: 12px;
+  padding: 5px 10px 0;
+  height: 15px
+}
+
+code.html:after {
+  content: "HTML"
+}
+
+code.javascript:after,code.js:after {
+  content: "JS"
+}
+
+code.bash:after {
+  content: "Shell"
+}
+
+code.css:after {
+  content: "CSS"
+}
+
+code.sass:after {
+  content: "SASS"
+}
+
+code.less:after {
+  content: "LESS"
+}
+
+code.style:after {
+  content: "Style"
+}
+
+code.java:after {
+  content: "Java"
+}
+
+code.c:after {
+  content: "C"
+}
+
+code.yml:after {
+  content: "YML"
+}
+
+code.php:after {
+  content: "PHP"
+}
+
+p code {
+  padding: 2px 8px;
+  text-shadow: 1px 2px 1px rgba(0,0,0,.02);
+  box-shadow: 0 2px 2px rgba(0,0,0,.05);
+  font-size: 13.5px;
+  color: #4d4d4c;
+  background: #fcfdfd
+}
+/**/
 @media screen and (min-width: 1600px) {
   html {
       font-size:19px
@@ -2199,6 +2202,20 @@ time:hover {
   animation-duration: .2s;
   animation-iteration-count: 1;
   animation-delay: 0s
+}
+
+.mark-body{
+  display: flex;
+}
+
+.mark-body .mark-textarea{
+  font-size: .8rem
+}
+
+.mark-preview{
+  flex: 1;
+  margin-left: 1rem;
+  align-self: stretch;
 }
 
 @keyframes gSlideDown {

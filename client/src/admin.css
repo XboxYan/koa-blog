@@ -63,7 +63,7 @@
     border: 1px solid #eee;
     padding: 15px 10px;
     border-radius: 5px;
-    resize: vertical;
+    resize: none;
 }
 
 .admin-container .edit-input:focus{
@@ -98,21 +98,10 @@
     pointer-events: none;
 }
 
-.admin-body{
-    display: flex;
+.admin-content{
+    padding-bottom: 1.5rem;
 }
 
-.admin-body .admin-textarea{
-    font-size: .8rem
-}
-
-.article-preview{
-    flex: 1;
-    margin-left: 1rem;
-    align-self: stretch;
-    overflow: auto;
-}
-
-.article-preview strong{
-    font-weight: bold;
+.admin-description{
+    
 }

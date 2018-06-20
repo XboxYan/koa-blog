@@ -1,12 +1,18 @@
 import React, { PureComponent, Fragment } from 'react';
-import Remarkable from 'remarkable';
-import hljs from 'highlightjs'
 import fetchData from '../util/Fetch';
+import Markview from '../components/markview';
 
-class Checkbox extends PureComponent {
+class CategoryGroup extends PureComponent {
 
     state = {
-        checked: this.props.checked
+        checked: this.props.checked,
+        categories:[]
+    }
+
+    getCategories = async () => {
+        this.setState({ isrender: true });
+        const categories = await fetchData(`/api/category`);
+        this.setState({ categories: categories.data, isrender: false });
     }
 
     onChange = (ev) => {
@@ -21,13 +27,16 @@ class Checkbox extends PureComponent {
         this.setState({ checked });
     }
 
+    componentDidMount() {
+        this.getCategories();
+    }
+
     render() {
-        const { checked } = this.state;
-        const { options } = this.props;
+        const { checked,categories } = this.state;
         return (
             <Fragment>
                 {
-                    options.length > 0 ? options.map((d) => (
+                    categories.length > 0 ? categories.map((d) => (
                         <Fragment key={d._id}>
                             <input className="checkbox" type="checkbox" onChange={this.onChange} checked={checked.indexOf(d._id) >= 0} id={d._id} />
                             <label className="article-tag" htmlFor={d._id} >{d.name}</label>
@@ -48,37 +57,21 @@ class MarkdownEditor extends PureComponent {
     };
 
     onChange = (e) => {
-        this.setState({ value: e.target.value });
-    }
-
-    getRawMarkup(value) {
-        const md = new Remarkable({
-            html:true,
-            langPrefix:'',
-            highlight: function (str, lang) {
-                if (lang && hljs.getLanguage(lang)) {
-                  try {
-                    hljs.configure({classPrefix:''});
-                    return hljs.highlight(lang, str).value;
-                  } catch (err) {}
-                }
-            
-                try {
-                  return hljs.highlightAuto(str).value;
-                } catch (err) {}
-            
-                return ''; // use external default escaping
-              }
-        });
-        return { __html: md.render(value) };
+        const value = e.target.value;
+        this.timer && clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            this.setState({ value });
+            this.props.onChange && this.props.onChange(value);
+        }, 300)
     }
 
     render() {
         const { value } = this.state;
+        const { className,rows,placeholder } = this.props;
         return (
-            <div className="admin-body">
-                <textarea spellCheck={false} onChange={this.onChange} defaultValue={value} rows="10" className="admin-textarea edit-input" />
-                <div className="article-preview" dangerouslySetInnerHTML={this.getRawMarkup(value)}></div>
+            <div className={"mark-body "+className}>
+                <textarea placeholder={placeholder} spellCheck={false} onChange={this.onChange} defaultValue={value} rows={rows} className="mark-textarea edit-input" />
+                <div className="mark-preview"><Markview value={value} /></div>
             </div>
         )
     }
@@ -86,37 +79,29 @@ class MarkdownEditor extends PureComponent {
 
 export default class extends PureComponent {
     state = {
-        categories: [],
         isrender: true
     }
 
-    getCategories = async () => {
-        this.setState({ isrender: true });
-        const categories = await fetchData(`/api/category`);
-        this.setState({ categories: categories.data, isrender: false });
-    }
-
-    onChange = (value) => {
+    onChangeCategories = (value) => {
         console.log(value)
     }
 
-    componentDidMount() {
-        this.getCategories();
+    onChangeContent = (value) => {
+        console.log(value)
     }
 
     render() {
-        const { categories } = this.state;
         return (
             <div className="container admin-container">
                 <section className="main sildeUpMin">
-                    <h2 className="admin-title">标题</h2>
+                    <div className="admin-title">标题</div>
                     <input spellCheck={false} className="edit-input" />
-                    <h2 className="admin-title">分类</h2>
-                    <Checkbox options={categories} onChange={this.onChange} checked={[]} />
-                    <h2 className="admin-title">简介</h2>
-                    <textarea spellCheck={false} rows="3" className="edit-input" />
-                    <h2 className="admin-title">正文</h2>
-                    <MarkdownEditor />
+                    <div className="admin-title">分类</div>
+                    <CategoryGroup onChange={this.onChangeCategories} checked={[]} />
+                    <div className="admin-title">简介</div>
+                    <MarkdownEditor pla rows={3} placeholder="一些简介~" />
+                    <div className="admin-title">正文</div>
+                    <MarkdownEditor className="admin-content" rows={10} placeholder="开始写文章吧!" onChange={this.onChangeContent} />
                 </section>
             </div>
         )
