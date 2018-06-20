@@ -33,7 +33,7 @@ export default class extends PureComponent {
             <div className="mask">
                 <div className="search-container sildeUpMin">
                     <div className="search-header">
-                        <input type="text" placeholder="输入你想搜索的" onChange={this.search} value={keywords} className="search-input" />
+                        <input spellCheck={false} type="text" placeholder="输入你想搜索的" onChange={this.search} value={keywords} className="search-input" />
                         <span className="search-cancel iconfont icon-cancel" onClick={()=>Control.go(-1)}></span>
                     </div>
                     <div className="search-result">

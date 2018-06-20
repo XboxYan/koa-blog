@@ -31,7 +31,7 @@ class Edit extends PureComponent {
         return (
             <div className="mask" style={{display:show?'block':'none'}}>
                 <form className="edit-container sildeUpMin" onSubmit={this.onSubmit} >
-                    <input ref={node=>this.input=node} type="text" placeholder={title} className="edit-input" />
+                    <input spellCheck={false} ref={node=>this.input=node} type="text" placeholder={title} className="edit-input" />
                     <span className="edit-cancel iconfont icon-cancel" onClick={this.hide}></span>
                 </form>
             </div>

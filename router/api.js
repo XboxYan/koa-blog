@@ -77,6 +77,7 @@ router.post('/category', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
+        "info":{}
     }
     const { name } = ctx.request.body;
     try {
@@ -84,16 +85,19 @@ router.post('/category', async (ctx, next) => {
         if(categoryInfo){
             responseData.success = false;
             responseData.message = "该分类已存在";
+            responseData.info = {};
             ctx.body = responseData;
         }else{
-            await new Categories({ name }).save();
+            const newCategory = await new Categories({ name }).save();
             responseData.success = true;
             responseData.message = '新增分类成功';
+            responseData.info = newCategory;
             ctx.body = responseData;
         }
     } catch (error) {
         responseData.success = false;
         responseData.message = error.message;
+        responseData.info = {};
         ctx.body = responseData;
     }
 });

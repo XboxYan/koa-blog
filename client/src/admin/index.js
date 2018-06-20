@@ -5,6 +5,7 @@ import Article from './article';
 import Category from './category';
 import Publish from './publish';
 import Nav from '../components/nav';
+import '../admin.css'
 
 export default class extends PureComponent {
     render() {
@@ -12,8 +13,8 @@ export default class extends PureComponent {
             <div className="app">
                 <Nav />
                 <Route index miss cache='parent' component={Home} />
-                <Route cache='parent' path="/article"  component={Article} />
-                <Route cache='parent' path="/category" component={Category} />
+                <Route cache='parent' path="/article-list"  component={Article} />
+                <Route cache='parent' path="/category-list" component={Category} />
                 <Route cache='parent' path="/publish" component={Publish} />
             </div>
         );

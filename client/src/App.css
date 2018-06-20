@@ -125,7 +125,8 @@ input{
 }
 
 .article-bottom .article-readmore:hover,.article-tag:hover,.pf-paginator a:hover,.post-meta>a:hover {
-  border: 1px solid #e26d6d
+  border: 1px solid #e26d6d;
+  color: #e26d6d;
 }
 
 .article-tag,.post-meta>a {
@@ -620,20 +621,40 @@ pre .comment {
   color: #8e908c
 }
 
-pre .attribute,pre .css .class,pre .css .id,pre .css .pseudo,pre .html .doctype,pre .regexp,pre .ruby .constant,pre .tag,pre .variable,pre .xml .doctype,pre .xml .pi,pre .xml .tag .title {
+pre .attribute,pre .name,pre .css .class,pre .css .id,pre .css .pseudo,pre .html .doctype,pre .regexp,pre .ruby .constant,pre .variable,pre .xml .doctype,pre .xml .pi,pre .xml .tag .title {
   color: #e24c38
+}
+
+pre .tag{
+  color: #8e908c
+}
+
+pre .attr{
+  color: #3e999f
 }
 
 pre .built_in,pre .command,pre .constant,pre .literal,pre .number,pre .params,pre .preprocessor {
   color: #e78c45
 }
 
-pre .css .rules .attribute,pre .formula,pre .header,pre .inheritance,pre .number,pre .ruby .class .title,pre .ruby .symbol,pre .special,pre .string,pre .value,pre .xml .cdata {
+pre .formula,pre .header,pre .inheritance,pre .number,pre .ruby .class .title,pre .ruby .symbol,pre .special,pre .string,pre .value,pre .xml .cdata {
   color: #718c00
 }
 
 pre .css .hexcolor,pre .title {
   color: #3e999f
+}
+
+pre .css .hexcolor,pre .title {
+  color: #3e999f
+}
+
+pre .css .selector-class {
+  color: #3e999f
+}
+
+pre .css .attribute {
+  color: #8293ef
 }
 
 pre .coffeescript .title,pre .function,pre .javascript .title,pre .perl .sub,pre .python .decorator,pre .python .title,pre .ruby .function .title,pre .ruby .title .keyword {
@@ -644,12 +665,12 @@ pre .javascript .function,pre .keyword {
   color: #e24c38
 }
 
-.highlight {
+pre {
   position: relative;
   width: 100%
 }
 
-.highlight:after {
+pre code:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -660,51 +681,47 @@ pre .javascript .function,pre .keyword {
   height: 15px
 }
 
-.highlight.html.highlight:after {
+code.html:after {
   content: "HTML"
 }
 
-.highlight.javascript.highlight:after,.highlight.js.highlight:after {
+code.javascript:after,code.js:after {
   content: "JS"
 }
 
-.highlight.bash.highlight:after {
+code.bash:after {
   content: "Shell"
 }
 
-.highlight.css.highlight:after {
+code.css:after {
   content: "CSS"
 }
 
-.highlight.sass.highlight:after {
+code.sass:after {
   content: "SASS"
 }
 
-.highlight.less.highlight:after {
+code.less:after {
   content: "LESS"
 }
 
-.highlight.styl.highlight:after {
+code.style:after {
   content: "Style"
 }
 
-.highlight.java.highlight:after {
+code.java:after {
   content: "Java"
 }
 
-.highlight.c+.highlight:after {
-  content: "C++"
-}
-
-.highlight.c.highlight:after {
+code.c:after {
   content: "C"
 }
 
-.highlight.yml.highlight:after {
+code.yml:after {
   content: "YML"
 }
 
-.highlight.php.highlight:after {
+code.php:after {
   content: "PHP"
 }
 
@@ -1762,7 +1779,7 @@ time:hover {
   color: rgba(0,0,0,.8);
   background-color: #fff;
   border-bottom: 1px solid #eee;
-  transition: .2s;
+  transition: .2s border-color;
   outline: none
 }
 
@@ -1788,7 +1805,8 @@ time:hover {
   font-size: 1rem;
   color: rgba(0,0,0,.8);
   background-color: #fff;
-  transition: .2s;
+  transition: .2s border-color;
+  width: 100%;
   outline: none
 }
 
@@ -2193,47 +2211,4 @@ time:hover {
       opacity: 1;
       transform: translateY(0)
   }
-}
-
-.table-con{
-  width: 100%;
-}
-
-.table-con th{
-  
-  background: #e26d6d;
-  color: #fff;
-  height: 40px;
-  border: 0;
-}
-
-.table-con td{
-  text-align: center;
-  word-wrap: break-word;
-  word-break: break-all;
-  border: 0;
-  height: 40px;
-}
-
-.table-con tbody tr{
-  transition: .2s;
-  border-bottom: 1px solid #eee;
-}
-
-.table-con tbody tr:hover{
-  background: #f9f9f9
-}
-
-.table-con tbody tr td:nth-child(2),.table-con tbody tr td:nth-child(5){
-  text-align: left;
-}
-
-.table-con .tag-wrap{
-  line-height: inherit;
-  padding: 3px 12px;
-  margin: 3px;
-}
-
-.table-con .article-tag{
-  margin: 3px;
 }
