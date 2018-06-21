@@ -102,6 +102,20 @@
     padding-bottom: 1.5rem;
 }
 
-.admin-description{
-    
+.admin-add-button{
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 3px 6px;
+    color: #e26d6d;
+    border-radius: 4px;
+    border: 1px solid #e26d6d;
+    transition: .2s;
+    font-size: .85rem;
 }
+
+.admin-add-button:hover{
+    background: #e26d6d;
+    color: #fff;
+}
+

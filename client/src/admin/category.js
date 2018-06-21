@@ -59,9 +59,9 @@ export default class extends PureComponent {
     onEdit = (id,oname) => () => {
         this.popedit.show(oname,'修改分类',async(name,cb)=>{
             if(name){
-                const categoryInfo = await fetchData(`/api/category`,{
+                const categoryInfo = await fetchData(`/api/category/${id}`,{
                     method:'PUT',
-                    body:JSON.stringify({id,name})
+                    body:JSON.stringify({name})
                 });
                 if(categoryInfo.success){
                     await this.getCategories();
@@ -87,9 +87,8 @@ export default class extends PureComponent {
     }
 
     onDel = (id) => async () => {
-        const categoryInfo = await fetchData(`/api/category`,{
-            method:'DELETE',
-            body:JSON.stringify({id})
+        const categoryInfo = await fetchData(`/api/category/${id}`,{
+            method:'DELETE'
         });
         if(categoryInfo.success){
             await this.getCategories();
@@ -108,6 +107,7 @@ export default class extends PureComponent {
                                 <th>_id</th>
                                 <th>名称</th>
                                 <th>创建时间</th>
+                                <th>更新时间</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -118,6 +118,7 @@ export default class extends PureComponent {
                                         <td>{category._id}</td>
                                         <td><CacheLink to={"/categories/" + category._id}>{category.name}</CacheLink></td>
                                         <td>{moment(category.createdAt).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</td>
+                                        <td>{moment(category.updatedAt).utcOffset(8).format("YYYY年M月D日 , HH:mm:ss")}</td>
                                         <td>
                                             <a className="tag-wrap" onClick={this.onEdit(category._id,category.name)}>编辑</a>
                                             <a className="tag-wrap" onClick={this.onDel(category._id)}>删除</a>
@@ -130,7 +131,7 @@ export default class extends PureComponent {
                     {
                         isrender && <Loader />
                     }
-                    <a className="article-tag" onClick={this.onAdd}>添加分类</a>
+                    <span className="admin-add-button" onClick={this.onAdd}>添加分类</span>
                 </section>
                 <Footer />
                 <Edit ref={node=>this.popedit=node} />

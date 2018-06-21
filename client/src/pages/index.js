@@ -13,7 +13,7 @@ export default class extends PureComponent {
         return (
             <div className="app">
                 <Header />
-                <Route index miss cache='parent' component={Home} path="/home" />
+                <Route index cache='parent' component={Home} path="/home" />
                 <Route cache='parent' component={Archives} path="/archives" />
                 <Route cache='parent' component={Categories} path="/categories" />
                 <Route cache='parent' component={About} path="/about" />

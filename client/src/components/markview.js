@@ -1,6 +1,7 @@
 import React from 'react';
 import Remarkable from 'remarkable';
 import hljs from 'highlightjs';
+import '../mark.css';
 
 export default (props) => {
     const getRawMarkup = (value) => {
@@ -18,6 +19,7 @@ export default (props) => {
                 }
 
                 try {
+                    hljs.configure({ classPrefix: '' });
                     return hljs.highlightAuto(str).value;
                 } catch (err) { }
 

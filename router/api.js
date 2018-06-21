@@ -110,7 +110,7 @@ router.get('/category', async (ctx, next) => {
         "message": "",
     }
     try {
-        const categories = await Categories.find().sort({createdAt:-1});
+        const categories = await Categories.find().sort({updatedAt:-1});
         responseData.success = true;
         responseData.message = '操作成功';
         responseData.data = categories;
@@ -124,12 +124,12 @@ router.get('/category', async (ctx, next) => {
 });
 
 //删除分类
-router.delete('/category', async (ctx, next) => {
+router.delete('/category/:id', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
     }
-    const { id } = ctx.request.body;
+    const { id } = ctx.params;
     try {
         const categoryInfo = await Categories.findById(id);
         if(categoryInfo){
@@ -151,12 +151,13 @@ router.delete('/category', async (ctx, next) => {
 });
 
 //修改分类
-router.put('/category', async (ctx, next) => {
+router.put('/category/:id', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
     }
-    const { name,id } = ctx.request.body;
+    const { id } = ctx.params;
+    const { name } = ctx.request.body;
     try {
         const categoryInfo = await Categories.findById(id);
         if(categoryInfo){
@@ -188,6 +189,33 @@ router.post('/article', async (ctx, next) => {
         responseData.success = true;
         responseData.message = '发布成功';
         ctx.body = responseData;
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        ctx.body = responseData;
+    }
+});
+
+//修改文章
+router.put('/article/:id', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "message": "",
+    }
+    const { id } = ctx.params;
+    const { title,categories,description,content } = ctx.request.body;
+    try {
+        const articleInfo = await Contents.findById(id);
+        if(articleInfo){
+            await articleInfo.update({title,categories,description,content});
+            responseData.success = true;
+            responseData.message = "修改成功";
+            ctx.body = responseData;
+        }else{
+            responseData.success = false;
+            responseData.message = '该文章不存在';
+            ctx.body = responseData;
+        }
     } catch (error) {
         responseData.success = false;
         responseData.message = error.message;
@@ -243,19 +271,25 @@ router.get('/article/:id', async (ctx, next) => {
         "next":{}
     }
     const { id } = ctx.params;
-    try {
-        const article = await Contents.findById(id).populate('categories');
-        //阅读数+1
-        //await article.update({$inc:{views:1}});
-        article.views++;
-        await article.save();
-        const prev = await Contents.findOne({createdAt:{$gt:article.createdAt}}).sort({createdAt:1}).select("title");
-        const next = await Contents.findOne({createdAt:{$lt:article.createdAt}}).sort({createdAt:-1}).select("title");
+    const { admin=false } = ctx.query;
+    try { 
+        if(!admin){
+            //阅读数+1
+            //await article.update({$inc:{views:1}});
+            const article = await Contents.findById(id).populate('categories');
+            article.views++;
+            await article.save();
+            const prev = await Contents.findOne({createdAt:{$gt:article.createdAt}}).sort({createdAt:1}).select("title");
+            const next = await Contents.findOne({createdAt:{$lt:article.createdAt}}).sort({createdAt:-1}).select("title");
+            responseData.prev = prev;
+            responseData.next = next;
+            responseData.data = article;
+        }else{
+            const article = await Contents.findById(id);
+            responseData.data = article;
+        }
         responseData.success = true;
         responseData.message = '操作成功';
-        responseData.prev = prev;
-        responseData.next = next;
-        responseData.data = article;
         ctx.body = responseData;        
     } catch (error) {
         responseData.success = false;

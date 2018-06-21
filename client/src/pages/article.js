@@ -4,6 +4,7 @@ import { Control,CacheLink } from 'react-keeper';
 import Donate from '../components/donate';
 import Loader from '../components/loader';
 import Footer from '../components/footer';
+import Markview from '../components/markview';
 import moment from 'moment';
 
 export default class extends PureComponent {
@@ -49,7 +50,7 @@ export default class extends PureComponent {
                                 </div>
                             </div>
                             <div className="post-content slideDownMin">
-                                {data.content}
+                                <Markview value={data.content} />
                             </div>
                             <div className="post-meta">
                                 <i className="iconfont icon-tag-inner"></i>

@@ -58,7 +58,7 @@ export default class extends PureComponent {
                                         <td>{article.views}</td>
                                         <td>{article.categories.map((category,i)=><CacheLink key={i} className="article-tag" to={"/categories/"+category._id}>{category.name}</CacheLink>)}</td>
                                         <td>
-                                            <a className="tag-wrap">编辑</a>
+                                            <CacheLink className="tag-wrap" to={'admin/publish/'+article._id} >编辑</CacheLink>
                                             <a className="tag-wrap">删除</a>
                                         </td>
                                     </tr>
@@ -69,6 +69,7 @@ export default class extends PureComponent {
                     {
                         isrender&&<Loader/>
                     }
+                    <CacheLink type="span" className="admin-add-button" to="/admin/publish" >现在发布</CacheLink>
                     <Pager
                         total={total}
                         pagesize={this.pagesize}
