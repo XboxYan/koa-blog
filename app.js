@@ -1,5 +1,7 @@
 const Koa = require('koa');
 
+const serve = require('koa-static');
+
 const mongoose = require('mongoose');
 
 const bodyParser = require('koa-bodyparser');
@@ -17,6 +19,8 @@ const app = new Koa();
 router.use('/', main.routes());
 
 router.use('/api', api.routes());
+
+app.use(serve(__dirname + '/client/build'));
 
 app.use(bodyParser());
 

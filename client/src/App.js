@@ -26,6 +26,7 @@ class App extends PureComponent {
 	}
 
 	logout = () => {
+		window.localStorage.removeItem('loginInfo');
 		this.setState({loginState:false,userInfo:{}});
 	}
 
@@ -36,7 +37,7 @@ class App extends PureComponent {
 				<Fragment>
 					<Route index component={Index} path="/" loginState={loginState} userInfo={userInfo} logout={this.logout} />
 					<Route component={Admin} path="/admin" enterFilter={this.loginFilter} />
-					<Route cache="false" component={Login} path="/login" login={this.login} />
+					<Route component={Login} path="/login" login={this.login} />
 				</Fragment>
 			</BrowserRouter>
 		);

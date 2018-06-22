@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link, Control } from 'react-keeper';
+import { Link } from 'react-keeper';
 
 export default class extends PureComponent {
     render() {
@@ -12,7 +12,7 @@ export default class extends PureComponent {
                     {
                         userInfo.isAdmin && <Link className="user-admin" to="/admin">进入后台</Link>
                     }
-                    <a className="login-out" href="javascript:void(0)" onClick={logout}>退出</a>
+                    <a className="login-out" onClick={logout}>退出</a>
                 </div>
             </div>
         )
