@@ -12,7 +12,7 @@ export default class extends PureComponent {
     render() {
         return (
             <div className="app">
-                <Header />
+                <Header {...this.props} />
                 <Route index cache='parent' component={Home} path="/home" />
                 <Route cache='parent' component={Archives} path="/archives" />
                 <Route cache='parent' component={Categories} path="/categories" />

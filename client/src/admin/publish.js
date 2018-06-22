@@ -159,7 +159,7 @@ export default class extends PureComponent {
             }
         }else{
             article.userId = "5b0cc5024607e5769c14e016"
-            //fabu
+            //发布
             const articleInfo = await fetchData(`/api/article`,{
                 method:'POST',
                 body:JSON.stringify(article)

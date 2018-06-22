@@ -6,7 +6,7 @@ const Comments = require('../models/Comments');
 const Categories = require('../models/Categories');
 
 //登录
-router.post('/user/login', async (ctx, next) => {
+router.post('/login', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
@@ -14,7 +14,7 @@ router.post('/user/login', async (ctx, next) => {
     }
     const { username, password } = ctx.request.body;
     try {
-        const userInfo = await User.findOne({username,password});
+        const userInfo = await User.findOne({username,password}).select("-password");
         ctx.type = 'json';
         if(userInfo){
             responseData.success = true;
@@ -42,7 +42,7 @@ router.post('/user/login', async (ctx, next) => {
 });
 
 //注册
-router.post('/user/register', async (ctx, next) => {
+router.post('/register', async (ctx, next) => {
     const responseData = {
         "success": false,
         "message": "",
