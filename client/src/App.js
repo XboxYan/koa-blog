@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { BrowserRouter, Route, Control } from 'react-keeper';
+import { HashRouter, Route, Control } from 'react-keeper';
 import Index from './pages';
 import Admin from './admin';
 import Login from './login';
@@ -33,13 +33,13 @@ class App extends PureComponent {
 	render() {
 		const {loginState,userInfo} = this.state;
 		return (
-			<BrowserRouter>
+			<HashRouter>
 				<Fragment>
 					<Route index component={Index} path="/" loginState={loginState} userInfo={userInfo} logout={this.logout} />
 					<Route component={Admin} path="/admin" enterFilter={this.loginFilter} />
 					<Route component={Login} path="/login" login={this.login} />
 				</Fragment>
-			</BrowserRouter>
+			</HashRouter>
 		);
 	}
 }
