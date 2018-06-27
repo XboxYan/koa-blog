@@ -29,9 +29,9 @@ export default class extends PureComponent {
     render() {
         const { username,password } = this.state;
         return (
-            <div className="app">
+            <div className="app app-center">
                 <Back/>
-                <form className="login-con" onSubmit={this.onSubmit}>
+                <form className="login-con sildeUpMin" onSubmit={this.onSubmit}>
                     <h3 className="login-title">LOGIN</h3>
                     <label className="login-label">USER</label>
                     <input className="login-input" value={username} onChange={this.onChange('username')} />

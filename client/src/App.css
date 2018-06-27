@@ -150,6 +150,12 @@ blockquote p {
   z-index: 1;
 }
 
+.app-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header-menu-link,.search-content,.search-title,.toc-item,.toc-subitem {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -742,12 +748,13 @@ body {
 }
 
 a {
+  color: rgba(0,0,0,.75);
   text-decoration: none;
   transition: all .2s ease
 }
 
-a:active,a:link,a:visited {
-  color: rgba(0,0,0,.75)
+a:active,a:visited {
+  color: rgba(0,0,0,.85)
 }
 
 a:hover {
@@ -1973,10 +1980,6 @@ time:hover {
 }
 
 .login-con{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
   max-width: 100%;
   width: 420px;
   font-family: -apple-system,BlinkMacSystemFont,Open Sans,Microsoft YaHei,Arial,"sans-serif";
