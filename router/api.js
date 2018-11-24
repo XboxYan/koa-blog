@@ -1,4 +1,5 @@
 const router = require('koa-router')();
+const fetch = require('node-fetch');
 
 const User = require('../models/Users');
 const Contents = require('../models/Contents');
@@ -424,6 +425,74 @@ router.get('/search', async (ctx, next) => {
         responseData.message = error.message;
         responseData.data = {};
         ctx.body = responseData;
+    }
+});
+
+const getPlayList = (id) => {
+    return fetch(`http://music.163.com/api/playlist/detail?id=${id}`)
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .catch((err) => {
+        console.warn(err);
+    })
+}
+
+const getLyric = (id) => {
+    return fetch(`http://music.163.com/api/song/lyric?os=pc&id=${id}&lv=-1&kv=-1&tv=-1`)
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .catch((err) => {
+        console.warn(err);
+    })
+}
+
+//获取音乐列表
+router.get('/playlist/:id', async (ctx, next) => {
+    const responseData = {
+        "success": false,
+        "data":[],
+        "message": "",
+    }
+    const { id } = ctx.params;
+    try {
+        const { limit } = ctx.query;
+        const data = await getPlayList(id);
+        if(data.code===200){
+			const playList = data.result.tracks.slice(0,limit).map(item=>({
+                id: item.id,
+				name: item.name,
+				artist: item.artists.map(el=>el.name).join(','),
+				url: `http://music.163.com/song/media/outer/url?id=${item.id}.mp3`,
+                cover: item.album.picUrl.replace(/http:/,'https:'),
+                lrc:`/api/lyric/${item.id}`
+			}))
+            responseData.success = true;
+            responseData.message = '操作成功';
+            responseData.data = playList;
+            ctx.body = responseData;
+		}
+    } catch (error) {
+        responseData.success = false;
+        responseData.message = error.message;
+        responseData.data = [];
+        ctx.body = responseData;
+    }
+});
+
+//获取音乐歌词
+router.get('/lyric/:id', async (ctx, next) => {
+    const { id } = ctx.params;
+    try {
+        const lyric = await getLyric(id);
+        ctx.body = lyric.lrc.lyric;
+    } catch (error) {
+        ctx.body = '';
     }
 });
 

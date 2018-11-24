@@ -20,7 +20,7 @@ router.use('/', main.routes());
 
 router.use('/api', api.routes());
 
-app.use(serve(__dirname + '/client/build'));
+//app.use(serve(__dirname + '/client/build'));
 
 app.use(bodyParser());
 
